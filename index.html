@@ -45,4 +45,47 @@ chatMessages.push({role:'bot',text:'Tudo bem! O lançamento foi cancelado.'});
 renderChat();
 };
 })();
+  (function(){
+const respostaAnterior=responder;
+responder=async function(){
+const campo=$('pergunta');
+const pergunta=campo.value.trim();
+const p=pergunta.toLowerCase();
+const mensal=/quanto.*(gastei|recebi|ganhei).*m[eê]s|gastos? (do|deste|desse) m[eê]s|receitas? (do|deste|desse) m[eê]s/i.test(pergunta);
+const categoria=/quanto.*(combust[ií]vel|gasolina|transporte|alimenta[cç][aã]o|mercado|moradia)|qual categoria.*(mais|gasto)|maiores despesas/i.test(pergunta);
+if(!mensal&&!categoria)return respostaAnterior();
+if(!pergunta||busy)return;
+const registros=Array.isArray(data.finance)?data.finance:[];
+const mes=new Date().toLocaleDateString('sv-SE').slice(0,7);
+const temData=r=>/^\d{4}-\d{2}-\d{2}$/.test(r.date||'');
+const atuais=registros.filter(r=>temData(r)&&r.date.slice(0,7)===mes);
+const soma=lista=>lista.reduce((s,r)=>s+(Number(r.value)||0),0);
+const entradas=atuais.filter(r=>r.type==='entrada');
+const saidas=atuais.filter(r=>r.type==='saida');
+let resposta='';
+if(categoria){
+const categorias={};
+for(const r of saidas){
+const c=r.category||'Sem categoria';
+categorias[c]=(categorias[c]||0)+(Number(r.value)||0);
+}
+const mapa=/combust[ií]vel|gasolina|transporte/.test(p)?'Transporte':/mercado|alimenta[cç][aã]o/.test(p)?'Alimentação':/moradia/.test(p)?'Moradia':null;
+if(mapa){
+resposta='Neste mês, seus gastos com '+mapa+' somam '+money(categorias[mapa]||0)+'.';
+}else{
+const lista=Object.entries(categorias).sort((a,b)=>b[1]-a[1]);
+resposta=lista.length?'Gastos por categoria neste mês:\n'+lista.map(([c,v])=>c+': '+money(v)).join('\n'):'Ainda não há despesas datadas neste mês.';
+}
+}else if(/recebi|ganhei|receita/.test(p)){
+resposta='Você recebeu '+money(soma(entradas))+' neste mês.';
+}else{
+resposta='Você gastou '+money(soma(saidas))+' neste mês.';
+}
+if(registros.some(r=>!temData(r)))resposta+='\n\nAtenção: lançamentos antigos sem data não entraram neste relatório.';
+chatMessages.push({role:'user',text:pergunta});
+chatMessages.push({role:'bot',text:resposta});
+campo.value='';
+renderChat();
+};
+})();
 </script></body></html>
