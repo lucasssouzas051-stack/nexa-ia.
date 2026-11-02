@@ -232,7 +232,7 @@ window.NEXA_USER_STORAGE_SUFFIX = (function(){
      <button type="submit" class="nexa-auth-primary">Criar meu perfil grátis</button>
     </form>
     <div class="nexa-auth-note"><strong>Esta é uma versão de teste:</strong> o perfil fica salvo somente neste navegador. Não é um login protegido por senha, não sincroniza entre aparelhos e ainda não permite assinaturas pagas.</div>
-    <button class="nexa-auth-secondary" id="nexaLocalCancel" type="button">Agora não — continuar no aplicativo</button>
+    <button class="nexa-auth-secondary" id="nexaLocalCancel" type="button" hidden>Voltar ao aplicativo</button>
    </div>
    <div id="nexaAuthLocalProfile" hidden>
     <div class="nexa-local-pill">✦ MEU PERFIL</div>
@@ -1247,12 +1247,13 @@ $('bankTxDate').value=today();bankRender();
    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return text('Digite um e-mail válido.','error');
    try{
      localStorage.setItem(LOCAL_PROFILE_KEY,JSON.stringify({name,email,updatedAt:new Date().toISOString()}));
+     document.body.classList.remove('nexa-auth-loading');
      openLocalProfile();
      text('Perfil salvo neste iPhone. Você já pode usar a Nexa!','ok');
    }catch(error){text('Não foi possível salvar o perfil. Confira o armazenamento do navegador.','error');}
  });
- $('nexaLocalCancel').addEventListener('click',()=>displayGate(false));
- $('nexaLocalClose').addEventListener('click',()=>displayGate(false));
+ $('nexaLocalCancel').addEventListener('click',()=>{if(readLocalProfile())displayGate(false);});
+ $('nexaLocalClose').addEventListener('click',()=>{if(readLocalProfile())displayGate(false);else openLocalProfile();});
  $('nexaLocalEdit').addEventListener('click',()=>{
    const profile=readLocalProfile();
    $('nexaLocalName').value=profile?.name||'';
@@ -1262,6 +1263,7 @@ $('bankTxDate').value=today();bankRender();
  $('nexaLocalDelete').addEventListener('click',()=>{
    if(!confirm('Apagar somente seu nome e e-mail deste navegador? Seus registros financeiros não serão apagados.'))return;
    localStorage.removeItem(LOCAL_PROFILE_KEY);
+   document.body.classList.add('nexa-auth-loading');
    openLocalProfile();
    text('Perfil apagado. Os seus dados financeiros continuam salvos aqui.','ok');
  });
@@ -1334,6 +1336,6 @@ $('bankTxDate').value=today();bankRender();
    try{for(const key of originals)localStorage.setItem(key+suffix,localStorage.getItem(key));window.location.reload();}
    catch(error){text('Não foi possível copiar os dados. Verifique o armazenamento do Safari.','error')}
  });
- if(validConfig(config)){initialize();}else unlockDemo();
+ if(validConfig(config)){initialize();}else if(readLocalProfile()){unlockDemo();}else{document.body.classList.add('nexa-auth-loading');openLocalProfile();}
 })();
 </script></body></html>
