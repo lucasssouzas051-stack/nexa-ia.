@@ -180,6 +180,21 @@ html, body {
 .nexa-local-identity strong{font-size:14px;color:#f5f7ff;font-weight:700;overflow-wrap:anywhere}
 [hidden]{display:none!important}
 @media(min-width:600px){.nexa-auth-box{padding:30px}}
+
+/* Painel administrativo Nexa PRO: permissão verificada no Supabase. */
+.nexa-admin-card{margin:13px 0;padding:16px;border-radius:18px;background:linear-gradient(145deg,#29234a,#151d35);border:1px solid #967bff66}
+.nexa-admin-card h4{margin:0 0 8px;font-size:16px;color:#ede3ff}
+.nexa-admin-card p{font-size:12px;line-height:1.55;color:#bfcae0}
+.nexa-admin-card label{display:block;margin:13px 0 6px;font-size:12px;font-weight:700;color:#d4def5}
+.nexa-admin-card input{width:100%;background:#0c1427;color:#fff;border:1px solid #8292bb55;padding:13px;border-radius:13px;font-size:16px!important}
+.nexa-admin-card .nexa-auth-primary{margin-top:12px}
+.nexa-admin-customers{margin-top:13px;max-height:350px;overflow-y:auto;font-size:12px;color:#d6def4}
+.nexa-admin-customer{padding:12px 0;border-bottom:1px solid #ffffff20;overflow-wrap:anywhere}
+.nexa-admin-customer:last-child{border-bottom:0}
+.nexa-admin-customer b{display:block;color:#fff;margin-bottom:4px}
+.nexa-admin-customer small{display:block;color:#aab9d4;line-height:1.55}
+.nexa-admin-customer button{margin-top:8px;background:#40366d;border:1px solid #9b86ee88;border-radius:10px;color:#f4eaff;padding:8px 11px;font-weight:700}
+.nexa-admin-result{font-size:12px;color:#d9e5ff;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:12px}
 </style><script>
 /* Desativa gestos de ampliar no Safari iOS; nao bloqueia rolagem normal. */
 (function manterEscalaNexa(){
@@ -274,7 +289,19 @@ window.NEXA_USER_STORAGE_SUFFIX = (function(){
    <div id="nexaAuthProfile" hidden>
     <h3>Minha conta</h3><p class="nexa-auth-muted">Suas informações de acesso à Nexa IA.</p>
     <div class="nexa-auth-accountline" id="nexaAuthAccountEmail"></div>
-    <div class="nexa-auth-note"><strong>Plano atual: Nexa Grátis</strong><p style="margin:6px 0 0">O Nexa PRO está em preparação. Nenhuma cobrança está ativada.</p></div>
+    <div class="nexa-auth-note"><strong id="nexaVerifiedPlan">Verificando seu plano...</strong><p style="margin:6px 0 0">A assinatura depende de aprovação após confirmação do pagamento. Os recursos premium ainda estão em implantação.</p></div>
+     <div class="nexa-admin-card" id="nexaAdminPanel" hidden>
+       <h4>✦ Painel administrativo Nexa PRO</h4>
+       <p>Aprovação manual: confira primeiro o recebimento no PagBank. Cada aprovação acrescenta 30 dias de acesso. Essa área é exibida apenas após o Supabase validar sua permissão.</p>
+       <form id="nexaAdminApproveForm">
+         <label for="nexaAdminTargetUid">UID do cliente cadastrado</label>
+         <input id="nexaAdminTargetUid" type="text" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" required>
+         <button class="nexa-auth-primary" id="nexaAdminApproveButton" type="submit">Aprovar 30 dias de Nexa PRO</button>
+       </form>
+       <p class="nexa-admin-result" id="nexaAdminResult" role="status"></p>
+       <button type="button" class="nexa-auth-secondary" id="nexaAdminRefresh" style="margin-top:15px">Atualizar lista de clientes</button>
+       <div id="nexaAdminCustomers" class="nexa-admin-customers" aria-live="polite">Toque em atualizar para carregar os clientes cadastrados.</div>
+     </div>
     <div class="nexa-auth-buttons">
      <button type="button" class="nexa-auth-secondary" id="nexaAuthImport">Importar dados antigos deste aparelho</button>
      <button type="button" class="nexa-auth-secondary" id="nexaAuthGoPro">Conhecer Nexa PRO • R$ 19,90/mês</button>
@@ -1164,6 +1191,7 @@ $('bankTxDate').value=today();bankRender();
    document.body.classList.remove('nexa-auth-loading');
    displayGate(false);
    window.nexaAuthUser={id:user.id,email:user.email||''};
+   void refreshNexaPermissions();
  };
  const lock=()=>{document.body.classList.add('nexa-auth-loading');show('nexaAuthLogin');};
  const unlockDemo=()=>{document.body.classList.remove('nexa-auth-loading');displayGate(false);};
@@ -1233,10 +1261,84 @@ $('bankTxDate').value=today();bankRender();
    }
    displayGate(true);
  };
+ let isNexaAdmin=false;
+ const formatBRDate=value=>new Intl.DateTimeFormat('pt-BR',{dateStyle:'long',timeStyle:'short',timeZone:'America/Sao_Paulo'}).format(new Date(value));
+ async function refreshNexaPermissions(){
+   if(!client||!user)return;
+   const panel=$('nexaAdminPanel'),plan=$('nexaVerifiedPlan');
+   panel.hidden=true;isNexaAdmin=false;
+   try{
+     const [adminResult,proResult]=await Promise.all([
+       client.from('nexa_administradores').select('usuario_id').eq('usuario_id',user.id).maybeSingle(),
+       client.from('nexa_pro_assinaturas').select('situacao,vencimento').eq('usuario_id',user.id).maybeSingle()
+     ]);
+     if(adminResult.error)throw adminResult.error;
+     isNexaAdmin=!!adminResult.data;
+     panel.hidden=!isNexaAdmin;
+     if(isNexaAdmin)void loadNexaCustomers();
+     if(proResult.error)throw proResult.error;
+     const pro=proResult.data;
+     const active=pro?.situacao==='ativo'&&pro.vencimento&&new Date(pro.vencimento).getTime()>Date.now();
+     plan.textContent=active?'Plano atual: Nexa PRO · até '+formatBRDate(pro.vencimento):'Plano atual: Nexa Grátis';
+     const indicator=$('nexaCurrentPlan');if(indicator)indicator.textContent=active?'PRO':'Grátis';
+     window.nexaVerifiedProActive=!!active;
+   }catch(error){
+     plan.textContent='Não foi possível verificar seu plano agora';
+     panel.hidden=true;
+     window.nexaVerifiedProActive=false;
+   }
+ }
+ async function loadNexaCustomers(){
+   const target=$('nexaAdminCustomers'),button=$('nexaAdminRefresh');
+   if(!client||!user||!isNexaAdmin)return;
+   button.disabled=true;target.textContent='Carregando clientes...';
+   try{
+     const {data,error}=await client.rpc('nexa_listar_clientes');
+     if(error)throw error;
+     target.replaceChildren();
+     if(!data?.length){target.textContent='Nenhum cliente cadastrado ainda.';return;}
+     for(const c of data){
+       const item=document.createElement('div');item.className='nexa-admin-customer';
+       const title=document.createElement('b');title.textContent=c.email||'Sem e-mail';item.appendChild(title);
+       const status=document.createElement('small');
+       const active=c.situacao==='ativo'&&c.vencimento&&new Date(c.vencimento).getTime()>Date.now();
+       status.textContent=(active?'PRO ativo até '+formatBRDate(c.vencimento):'Plano grátis / PRO inativo')+' · UID: '+c.usuario_id;
+       item.appendChild(status);
+       const choose=document.createElement('button');choose.type='button';choose.textContent='Selecionar para aprovação';
+       choose.addEventListener('click',()=>{
+         $('nexaAdminTargetUid').value=c.usuario_id;
+         $('nexaAdminTargetUid').focus();
+         $('nexaAdminTargetUid').scrollIntoView({block:'center',behavior:'smooth'});
+       });
+       item.appendChild(choose);target.appendChild(item);
+     }
+   }catch(error){target.textContent='Não foi possível carregar os clientes: '+String(error.message||error).slice(0,220);}
+   finally{button.disabled=false;}
+ }
+ $('nexaAdminRefresh').addEventListener('click',loadNexaCustomers);
+ $('nexaAdminApproveForm').addEventListener('submit',async event=>{
+   event.preventDefault();
+   const result=$('nexaAdminResult'),button=$('nexaAdminApproveButton');
+   if(!client||!user||!isNexaAdmin)return;
+   const uid=$('nexaAdminTargetUid').value.trim();
+   if(!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i.test(uid)){
+     result.textContent='Informe um UID válido do cliente.';return;
+   }
+   if(!confirm('Você verificou o pagamento desse cliente no PagBank?\n\nAprovar 30 dias de Nexa PRO para o UID '+uid+'?'))return;
+   button.disabled=true;result.textContent='Registrando aprovação segura no Supabase...';
+   try{
+     const {data,error}=await client.rpc('nexa_aprovar_pro',{p_usuario_id:uid});
+     if(error)throw error;
+     result.textContent='Assinatura aprovada! Vencimento: '+formatBRDate(data)+'.';
+     if(uid===user.id)await refreshNexaPermissions();
+     await loadNexaCustomers();
+   }catch(error){result.textContent='Aprovação não concluída: '+String(error.message||error).slice(0,230);}
+   finally{button.disabled=false;}
+ });
  function openAccount(){
    if(!configured){openLocalProfile();return;}
    displayGate(true);
-   if(user){$('nexaAuthAccountEmail').textContent=user.email||'Conta autenticada';show('nexaAuthProfile');}
+   if(user){$('nexaAuthAccountEmail').textContent=user.email||'Conta autenticada';show('nexaAuthProfile');void refreshNexaPermissions();}
    else{show('nexaAuthLogin');}
  }
  window.nexaAuthOpenAccount=openAccount;
