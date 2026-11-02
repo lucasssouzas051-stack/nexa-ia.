@@ -36,7 +36,7 @@ desc=desc||'Lançamento pela Nexa';
 const nome=tipo==='saida'?'despesa':'receita';
 const aprovado=confirm('Confirmar '+nome+'?\n\n'+desc+'\n'+money(valor));
 if(aprovado){
-data.finance.unshift({desc,value:valor,type:tipo});
+data.finance.unshift({desc,value:valor,type:tipo,date:new Date().toLocaleDateString('sv-SE'),category:/combustível|gasolina|posto/i.test(desc)?'Transporte':/café|almoço|jantar|mercado|comida/i.test(desc)?'Alimentação':/aluguel|energia|água|internet/i.test(desc)?'Moradia':'Outros'});
 save();
 chatMessages.push({role:'bot',text:'✅ '+(tipo==='saida'?'Despesa':'Receita')+' registrada!\n'+desc+' — '+money(valor)});
 }else{
