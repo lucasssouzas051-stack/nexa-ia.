@@ -257,7 +257,7 @@ window.NEXA_USER_STORAGE_SUFFIX = (function(){
     <div class="nexa-auth-note">Os seus dados financeiros permanecem neste navegador, como antes. Este perfil não protege nem isola os dados de outras pessoas que usam o mesmo aparelho.</div>
     <div class="nexa-auth-buttons">
      <button type="button" class="nexa-auth-secondary" id="nexaLocalEdit">Editar perfil</button>
-     <button type="button" class="nexa-auth-secondary" id="nexaLocalPro">Conhecer Nexa PRO · R$ 19,90/mês</button>
+     <button type="button" class="nexa-auth-secondary" data-nexa-pro-cta id="nexaLocalPro">Conhecer Nexa PRO · R$ 19,90/mês</button>
      <button type="button" class="nexa-auth-primary" id="nexaLocalClose">Voltar ao aplicativo</button>
      <button type="button" class="nexa-auth-textbtn" id="nexaLocalDelete">Apagar somente o perfil deste aparelho</button>
     </div>
@@ -304,7 +304,7 @@ window.NEXA_USER_STORAGE_SUFFIX = (function(){
      </div>
     <div class="nexa-auth-buttons">
      <button type="button" class="nexa-auth-secondary" id="nexaAuthImport">Importar dados antigos deste aparelho</button>
-     <button type="button" class="nexa-auth-secondary" id="nexaAuthGoPro">Conhecer Nexa PRO • R$ 19,90/mês</button>
+     <button type="button" class="nexa-auth-secondary" data-nexa-pro-cta id="nexaAuthGoPro">Conhecer Nexa PRO • R$ 19,90/mês</button>
      <button type="button" class="nexa-auth-secondary" id="nexaAuthClose">Voltar ao aplicativo</button>
      <button type="button" class="nexa-auth-secondary" id="nexaAuthLogout">Sair da conta</button>
     </div>
@@ -321,7 +321,7 @@ window.NEXA_USER_STORAGE_SUFFIX = (function(){
 </header>
 <section id="inicio" class="active">
  <p class="eyebrow">SEU ESPAÇO INTELIGENTE</p><h2 class="hello">Seu dia, mais leve. <span aria-hidden="true">✳</span></h2><p class="subtitle">Tudo o que você precisa para cuidar da vida e do dinheiro.</p>
-<div class="nexa-pro-strip"><div><div class="label">✧ Nexa PRO <span class="nexa-plan-badge" id="nexaCurrentPlan">Grátis</span></div><p>Conheça os recursos premium por R$ 19,90/mês.</p></div><button onclick="go('pro')" type="button">Ver planos</button></div>
+<div class="nexa-pro-strip"><div><div class="label">✧ Nexa PRO <span class="nexa-plan-badge" id="nexaCurrentPlan">Grátis</span></div><p>Conheça os recursos premium por R$ 19,90/mês.</p></div><button data-nexa-pro-cta onclick="go('pro')" type="button">Ver planos</button></div>
  <div class="card balance"><div class="balance-inner"><div class="balance-header"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 9h18M16 15h2"/><path d="M7 5V3h11"/></svg> Visão geral do seu saldo</div><strong id="saldo">R$ 0,00</strong><span class="hint"><span class="hint-dot"></span>Atualizado com seus lançamentos</span></div><svg class="spark" viewBox="0 0 140 80" fill="none" aria-hidden="true"><path d="M0 74 C18 70 24 35 40 46 S63 67 78 37 S100 48 116 20 S132 16 140 3" stroke="#A8E9FF" stroke-width="3" stroke-linecap="round"/><path d="M0 74 C18 70 24 35 40 46 S63 67 78 37 S100 48 116 20 S132 16 140 3 V80 H0Z" fill="url(#sparkfill)"/><defs><linearGradient id="sparkfill" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#78D5FF" stop-opacity=".24"/><stop offset="1" stop-color="#78D5FF" stop-opacity="0"/></linearGradient></defs></svg></div>
  <div class="section-top"><h3 class="section-title">Acesso rápido</h3><span class="section-kicker">Organize em segundos</span></div>
  <div class="quick">
@@ -345,7 +345,7 @@ window.NEXA_USER_STORAGE_SUFFIX = (function(){
  <div class="card items-card"><div class="card-title"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h14v18l-3-2-4 2-4-2-3 2V3Z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg> Histórico de lançamentos</div><div id="movimentos"></div></div>
 </section>
 <section id="assistente" class="chat-page">
-<div class="nexa-pro-meter"><div><strong>Nexa Grátis</strong><span id="nexaChatUsage">10 de 10 mensagens grátis restantes hoje</span></div><button type="button" onclick="go('pro')">Ver PRO</button></div>
+<div class="nexa-pro-meter"><div><strong>Nexa Grátis</strong><span id="nexaChatUsage">10 de 10 mensagens grátis restantes hoje</span></div><button type="button" data-nexa-pro-cta onclick="go('pro')">Ver PRO</button></div>
  <div class="chat-head"><div class="chat-persona"><div class="logo"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m19 17 .7 1.3L21 19l-1.3.7L19 21l-.7-1.3L17 19l1.3-.7L19 17ZM5 2l.7 1.3L7 4l-1.3.7L5 6l-.7-1.3L3 4l1.3-.7L5 2Z"/></svg></div><div><h2>Nexa Assistente</h2><small>Sua parceira para o dia a dia</small></div></div><button class="ghost" onclick="newChat()"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Nova</button></div>
  <p class="status" id="aiStatus">● Pronta para conversar</p>
  <div class="chat-history" id="chatHistory" role="log" aria-live="polite"></div>
@@ -359,7 +359,7 @@ window.NEXA_USER_STORAGE_SUFFIX = (function(){
  <div class="card items-card"><div class="card-title"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg> Suas tarefas</div><div id="tarefas"></div></div>
 </section>
 <section id="metas">
- <p class="eyebrow">SONHOS QUE VIRAM PLANOS</p><div class="page-heading"><span class="heading-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg></span><h2>Minhas metas</h2></div><p class="head-note">Cada conquista começa com um primeiro passo.</p><div class="nexa-pro-meter"><div><strong>Suas metas</strong><span id="nexaGoalUsage">Plano Grátis: 0 de 2 metas usadas</span></div><button type="button" onclick="go('pro')">Metas PRO</button></div>
+ <p class="eyebrow">SONHOS QUE VIRAM PLANOS</p><div class="page-heading"><span class="heading-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg></span><h2>Minhas metas</h2></div><p class="head-note">Cada conquista começa com um primeiro passo.</p><div class="nexa-pro-meter"><div><strong>Suas metas</strong><span id="nexaGoalUsage">Plano Grátis: 0 de 2 metas usadas</span></div><button type="button" data-nexa-pro-cta onclick="go('pro')">Metas PRO</button></div>
  <div class="card form-card"><div class="card-title"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8m-4-4h8"/></svg> Criar nova meta</div><label class="field" for="meta">Nome da meta</label><input class="input" id="meta" placeholder="Ex.: Reserva de emergência"><label class="field" for="alvo">Valor desejado (R$)</label><input class="input" id="alvo" type="number" min="0.01" step="0.01" placeholder="0,00"><button class="primary" onclick="addGoal()"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Criar meta</button></div>
  <div class="card items-card"><div class="card-title"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg> Seus objetivos</div><div id="metaslista"></div></div>
 </section>
@@ -423,7 +423,7 @@ window.NEXA_USER_STORAGE_SUFFIX = (function(){
         <li>Planejamento personalizado</li>
         <li>Análises e alertas inteligentes</li>
       </ul>
-      <button type="button" class="nexa-pro-action" onclick="nexaCheckoutInfo()">Ver pagamento no PagBank</button>
+      <button type="button" class="nexa-pro-action" data-nexa-pro-cta onclick="nexaCheckoutInfo()">Ver pagamento no PagBank</button>
     </div>
   </div>
   <div class="nexa-pro-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg><span><b>Pagamento PagBank para conferência.</b> Este botão abre uma cobrança real, mas o PRO ainda não é liberado após pagar. Não pague nem divulgue o link antes de confirmar a recorrência e configurar a verificação segura da assinatura.</span></div>
@@ -1096,27 +1096,31 @@ $('bankTxDate').value=today();bankRender();
     catch(e){return false}
   };
   function updatePlanIndicators(){
+    const premium=window.nexaVerifiedProActive===true;
     const n=messagesUsed();
     const c=document.getElementById('nexaChatUsage');
-    if(c)c.textContent=Math.max(0,FREE_CHAT_LIMIT-n)+' de '+FREE_CHAT_LIMIT+' mensagens grátis restantes hoje';
+    if(c)c.textContent=premium?'Nexa PRO ativo · conversas sem limite gratuito':Math.max(0,FREE_CHAT_LIMIT-n)+' de '+FREE_CHAT_LIMIT+' mensagens grátis restantes hoje';
     const g=document.getElementById('nexaGoalUsage');
-    if(g)g.textContent='Plano Grátis: '+data.goals.length+' de '+FREE_GOAL_LIMIT+' metas usadas'+(data.goals.length>FREE_GOAL_LIMIT?' (as anteriores foram preservadas)':'');
+    if(g)g.textContent=premium?'Nexa PRO ativo · metas ilimitadas':'Plano Grátis: '+data.goals.length+' de '+FREE_GOAL_LIMIT+' metas usadas'+(data.goals.length>FREE_GOAL_LIMIT?' (as anteriores foram preservadas)':'');
     const t=document.getElementById('nexaCurrentPlan');
-    if(t)t.textContent='Grátis';
+    if(t)t.textContent=premium?'PRO':'Grátis';
+    document.querySelectorAll('[data-nexa-pro-cta]').forEach(b=>{b.hidden=premium;});
   }
   window.nexaCheckoutInfo=function(){
+    if(window.nexaVerifiedProActive===true){toast('Sua conta já tem acesso Nexa PRO.');return;}
     go('pro');
     const aviso='ATENÇÃO: este link do PagBank pode cobrar de verdade.\n\nO Nexa PRO ainda NÃO é liberado automaticamente após o pagamento, e a recorrência não foi confirmada.\n\nNão faça pagamentos de teste nem compartilhe com clientes.\n\nDeseja abrir a página apenas para conferir os detalhes?';
     if(window.confirm(aviso)) window.open('https://pag.ae/82iVpoP9p','_blank','noopener,noreferrer');
   };
   window.nexaShowPremium=function(feature){
+    if(window.nexaVerifiedProActive===true){toast('Sua conta já possui Nexa PRO. Este recurso ainda está em desenvolvimento.');return;}
     go('pro');
     toast((feature||'Este recurso')+' faz parte do Nexa PRO.');
   };
   // Metas antigas continuam armazenadas e visíveis. O limite só bloqueia novas criações.
   const addGoalOriginal=addGoal;
   addGoal=function(){
-    if(data.goals.length>=FREE_GOAL_LIMIT){
+    if(window.nexaVerifiedProActive!==true && data.goals.length>=FREE_GOAL_LIMIT){
       window.nexaShowPremium('Metas ilimitadas');
       return;
     }
@@ -1129,11 +1133,11 @@ $('bankTxDate').value=today();bankRender();
   responder=async function(){
     const mensagem=document.getElementById('pergunta').value.trim();
     if(!mensagem||busy)return responderOriginalNexa.apply(this,arguments);
-    if(messagesUsed()>=FREE_CHAT_LIMIT){
+    if(window.nexaVerifiedProActive!==true && messagesUsed()>=FREE_CHAT_LIMIT){
       window.nexaShowPremium('Mais conversas com a IA');
       return;
     }
-    if(!recordMessage()){
+    if(window.nexaVerifiedProActive!==true && !recordMessage()){
       toast('Não foi possível registrar o uso neste navegador.');
       return;
     }
@@ -1147,6 +1151,7 @@ $('bankTxDate').value=today();bankRender();
     return result;
   };
   updatePlanIndicators();
+  window.nexaUpdatePlanIndicators=updatePlanIndicators;
   // Facilita diagnóstico sem expor segredos ou liberar recursos pagos.
   window.nexaMembership={plan:'free-preview',priceBRL:19.90,chatLimit:FREE_CHAT_LIMIT,goalLimit:FREE_GOAL_LIMIT,usage:()=>({messagesToday:messagesUsed(),goals:data.goals.length})};
 })();
@@ -1279,13 +1284,16 @@ $('bankTxDate').value=today();bankRender();
      if(proResult.error)throw proResult.error;
      const pro=proResult.data;
      const active=pro?.situacao==='ativo'&&pro.vencimento&&new Date(pro.vencimento).getTime()>Date.now();
-     plan.textContent=active?'Plano atual: Nexa PRO · até '+formatBRDate(pro.vencimento):'Plano atual: Nexa Grátis';
-     const indicator=$('nexaCurrentPlan');if(indicator)indicator.textContent=active?'PRO':'Grátis';
-     window.nexaVerifiedProActive=!!active;
+     const entitled=active||isNexaAdmin;
+     plan.textContent=isNexaAdmin?'Plano atual: Administrador · Nexa PRO incluído':active?'Plano atual: Nexa PRO · até '+formatBRDate(pro.vencimento):'Plano atual: Nexa Grátis';
+     const indicator=$('nexaCurrentPlan');if(indicator)indicator.textContent=entitled?'PRO':'Grátis';
+     window.nexaVerifiedProActive=!!entitled;
+     if(window.nexaUpdatePlanIndicators)window.nexaUpdatePlanIndicators();
    }catch(error){
      plan.textContent='Não foi possível verificar seu plano agora';
      panel.hidden=true;
      window.nexaVerifiedProActive=false;
+     if(window.nexaUpdatePlanIndicators)window.nexaUpdatePlanIndicators();
    }
  }
  async function loadNexaCustomers(){
