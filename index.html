@@ -140,6 +140,46 @@ html, body {
 @media(max-width:430px){
  .top{gap:7px}.brand{gap:8px;min-width:0}.brand .logo{width:40px;height:40px;border-radius:14px}.brand h1{font-size:21px;white-space:nowrap;letter-spacing:-.8px}.brand small{font-size:8px;letter-spacing:0;line-height:1.2}.top-actions{gap:6px;flex-shrink:0}.top .circle{width:36px;height:36px;border-radius:12px}.nexa-pro-top{min-height:36px;padding:8px;font-size:10px;gap:4px}.nexa-pro-top svg{width:15px;height:15px}
 }
+
+/* Nexa ID: cadastro real (Supabase Auth) com conta individual. */
+.nexa-auth-loading .app{display:none!important}
+.nexa-auth-gate{position:fixed;inset:0;z-index:9000;display:none;overflow-y:auto;overscroll-behavior:contain;align-items:flex-start;justify-content:center;padding:calc(26px + env(safe-area-inset-top,0px)) 18px calc(28px + env(safe-area-inset-bottom,0px));background:radial-gradient(ellipse 100% 50% at 50% 0%,#22214a 0%,#0a0e1b 65%,#080b17 100%);color:#f4f6ff}
+.nexa-auth-gate.is-visible,.nexa-auth-loading .nexa-auth-gate{display:flex}
+.nexa-auth-wrap{width:100%;max-width:430px;margin:auto 0}
+.nexa-auth-brand{display:flex;gap:12px;align-items:center;margin-bottom:25px;justify-content:center}
+.nexa-auth-brand-mark{display:grid;place-items:center;width:48px;height:48px;border-radius:16px;background:linear-gradient(145deg,#8161ed,#3683cb);font-weight:900;font-size:23px;box-shadow:0 12px 30px #6e67d73b}
+.nexa-auth-brand h2{font-size:25px;line-height:1.1;margin:0;letter-spacing:-1px}
+.nexa-auth-brand small{display:block;font-size:11px;letter-spacing:1.3px;margin-top:3px;color:#aeb8d7}
+.nexa-auth-box{background:linear-gradient(160deg,#1c2340,#11182c 84%);border:1px solid #7f86bd36;box-shadow:0 18px 50px #0007, inset 0 1px #ffffff13;border-radius:27px;padding:25px 20px 22px}
+.nexa-auth-box h3{font-size:24px;letter-spacing:-.7px;line-height:1.15;margin:0 0 8px}
+.nexa-auth-muted{color:#a9b8d7;font-size:13px;line-height:1.6;margin:0 0 20px}
+.nexa-auth-form{display:flex;flex-direction:column;gap:11px}
+.nexa-auth-form label{font-size:12px;font-weight:700;color:#d4def5}
+.nexa-auth-form input{width:100%;min-height:50px;border-radius:14px;border:1px solid #8292bb55;background:#0c1427;padding:12px 14px;color:#fff;outline:none;font-size:16px!important;transform:none!important}
+.nexa-auth-form input:focus{border-color:#b49cff;box-shadow:0 0 0 3px #9568ef30}
+.nexa-auth-primary,.nexa-auth-secondary{min-height:47px;width:100%;border-radius:14px;border:0;padding:11px 13px;font-size:14px;font-weight:800;transform:none!important}
+.nexa-auth-primary{color:white;background:linear-gradient(115deg,#6e51e1,#5759d8 56%,#287cba);box-shadow:0 9px 24px #684aff38}
+.nexa-auth-secondary{background:#ffffff0c;color:#d8e0fa;border:1px solid #ffffff28}
+.nexa-auth-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-top:15px}
+.nexa-auth-textbtn{color:#b7caff;background:transparent;border:0;font-size:13px;padding:6px;transform:none!important}
+.nexa-auth-note{padding:12px 13px;background:#171e36;border:1px solid #a98fff34;border-radius:12px;font-size:12px;line-height:1.6;color:#cbd7f0;margin:14px 0}
+.nexa-auth-message{margin-top:14px;font-size:13px;line-height:1.5;color:#dae7ff;min-height:16px;white-space:pre-wrap}
+.nexa-auth-message.error{color:#ffb3c0}.nexa-auth-message.ok{color:#8defca}
+.nexa-auth-divider{border:0;border-top:1px solid #ffffff20;margin:18px 0}
+.nexa-auth-accountline{font-size:13px;color:#d1daf0;word-break:break-word;margin:12px 0 16px}
+.nexa-auth-buttons{display:grid;gap:9px}
+.nexa-auth-offline{font-size:11px;text-align:center;color:#8391b4;margin:17px 4px 2px;line-height:1.5}
+.nexa-auth-profile-btn{display:grid;place-items:center;min-width:42px;height:42px;padding:0 9px;border-radius:15px;border:1px solid #b69cff6a;background:linear-gradient(130deg,#44376b,#1c2a4b);color:#e9d9ff}
+.nexa-auth-profile-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nexa-auth-top-actions{display:flex;gap:9px}
+
+/* Cadastro local simples: nao altera a escala nem a rolagem do iPhone. */
+.nexa-local-pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #ab9afa50;background:#7554be28;color:#c9bafc;border-radius:999px;padding:6px 11px;font-size:10px;letter-spacing:.9px;font-weight:800;margin-bottom:18px}
+.nexa-local-identity{display:grid;grid-template-columns:80px minmax(0,1fr);column-gap:14px;row-gap:13px;align-items:start;background:#0c1528;border-radius:15px;padding:17px 14px;border:1px solid #9e9fc533}
+.nexa-local-identity span{font-size:12px;color:#a7b3d2}
+.nexa-local-identity strong{font-size:14px;color:#f5f7ff;font-weight:700;overflow-wrap:anywhere}
+[hidden]{display:none!important}
+@media(min-width:600px){.nexa-auth-box{padding:30px}}
 </style><script>
 /* Desativa gestos de ampliar no Safari iOS; nao bloqueia rolagem normal. */
 (function manterEscalaNexa(){
@@ -164,10 +204,93 @@ html, body {
     ultimoToque=agora;
   }, {passive:false});
 })();
-</script></head><body><div class="app">
+</script><script>
+/* Configuracao publica do Supabase Auth. NUNCA cole sb_secret nem service_role.
+ * Quando quiser o login habilitado para TODOS os visitantes, preencher abaixo
+ * com o Project URL e a Publishable key do projeto Supabase.
+ * Para testar so no seu iPhone, use Minha conta > Configurar Supabase. */
+window.NEXA_SUPABASE_PUBLIC = {url:'',publishableKey:''};
+window.NEXA_USER_STORAGE_SUFFIX = (function(){
+ try { const uid=localStorage.getItem('nexa-auth-active-user-v1')||'';
+   return /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i.test(uid)?':'+uid:''; }
+ catch(e){ return ''; }
+})();
+</script></head><body class="nexa-auth-loading"><div class="nexa-auth-gate" id="nexaAuthGate" role="dialog" aria-modal="true" aria-label="Conta Nexa IA">
+ <div class="nexa-auth-wrap">
+  <div class="nexa-auth-brand"><div class="nexa-auth-brand-mark">✧</div><div><h2>Nexa IA</h2><small>SUA VIDA EM ORDEM</small></div></div>
+  <div class="nexa-auth-box">
+   <div id="nexaAuthLoading"><h3>Preparando sua conta</h3><p class="nexa-auth-muted">Verificando a conexão com segurança...</p></div>
+   <div id="nexaAuthLocal" hidden>
+    <div class="nexa-local-pill">✦ CADASTRO SIMPLIFICADO</div>
+    <h3>Seu espaço na Nexa</h3>
+    <p class="nexa-auth-muted">Comece com seu nome e e-mail. Sem senha ou configurações complicadas nesta etapa.</p>
+    <form class="nexa-auth-form" id="nexaAuthLocalForm">
+     <label for="nexaLocalName">Como podemos chamar você?</label>
+     <input id="nexaLocalName" name="name" type="text" autocomplete="name" maxlength="80" minlength="2" placeholder="Seu nome" required>
+     <label for="nexaLocalEmail">Seu e-mail</label>
+     <input id="nexaLocalEmail" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" autocorrect="off" maxlength="120" placeholder="voce@email.com" required>
+     <button type="submit" class="nexa-auth-primary">Criar meu perfil grátis</button>
+    </form>
+    <div class="nexa-auth-note"><strong>Esta é uma versão de teste:</strong> o perfil fica salvo somente neste navegador. Não é um login protegido por senha, não sincroniza entre aparelhos e ainda não permite assinaturas pagas.</div>
+    <button class="nexa-auth-secondary" id="nexaLocalCancel" type="button">Agora não — continuar no aplicativo</button>
+   </div>
+   <div id="nexaAuthLocalProfile" hidden>
+    <div class="nexa-local-pill">✦ MEU PERFIL</div>
+    <h3>Olá, <span id="nexaLocalProfileName">!</span></h3>
+    <p class="nexa-auth-muted">Seu perfil de demonstração está pronto.</p>
+    <div class="nexa-local-identity"><span>Nome</span><strong id="nexaLocalProfileFullName"></strong><span>E-mail</span><strong id="nexaLocalProfileEmail"></strong><span>Plano</span><strong>Nexa Grátis</strong></div>
+    <div class="nexa-auth-note">Os seus dados financeiros permanecem neste navegador, como antes. Este perfil não protege nem isola os dados de outras pessoas que usam o mesmo aparelho.</div>
+    <div class="nexa-auth-buttons">
+     <button type="button" class="nexa-auth-secondary" id="nexaLocalEdit">Editar perfil</button>
+     <button type="button" class="nexa-auth-secondary" id="nexaLocalPro">Conhecer Nexa PRO · R$ 19,90/mês</button>
+     <button type="button" class="nexa-auth-primary" id="nexaLocalClose">Voltar ao aplicativo</button>
+     <button type="button" class="nexa-auth-textbtn" id="nexaLocalDelete">Apagar somente o perfil deste aparelho</button>
+    </div>
+   </div>
+   <div id="nexaAuthSetup" hidden>
+    <h3>Conectar o cadastro</h3><p class="nexa-auth-muted">Configure o Supabase uma vez para ativar contas por e-mail e senha. Nesta fase você pode testar no seu iPhone sem alterar os arquivos.</p>
+    <form class="nexa-auth-form" id="nexaAuthSetupForm">
+     <label for="nexaSbUrl">URL do projeto Supabase</label><input id="nexaSbUrl" type="url" inputmode="url" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="https://xxxxx.supabase.co" required>
+     <label for="nexaSbKey">Chave pública (Publishable key)</label><input id="nexaSbKey" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" autocomplete="off" placeholder="sb_publishable_..." required>
+     <button class="nexa-auth-primary" type="submit">Ativar cadastro neste dispositivo</button>
+    </form>
+    <div class="nexa-auth-note">Use apenas a chave <strong>sb_publishable_…</strong>. Nunca utilize sb_secret ou service_role. Essa configuração de teste fica neste navegador; para publicar para todos, ela deve ser incluída no index.html.</div>
+    <button class="nexa-auth-secondary" id="nexaAuthBackSetup" type="button">Voltar ao aplicativo</button>
+   </div>
+   <div id="nexaAuthLogin" hidden>
+    <h3 id="nexaAuthLoginTitle">Bem-vindo de volta</h3><p class="nexa-auth-muted" id="nexaAuthLoginHint">Entre para acessar sua conta Nexa.</p>
+    <form class="nexa-auth-form" id="nexaAuthLoginForm">
+     <label for="nexaAuthEmail">Seu e-mail</label><input id="nexaAuthEmail" type="email" inputmode="email" autocapitalize="off" autocorrect="off" autocomplete="email" placeholder="voce@email.com" required>
+     <label for="nexaAuthPassword">Senha</label><input id="nexaAuthPassword" type="password" autocomplete="current-password" minlength="6" placeholder="Mínimo de 6 caracteres" required>
+     <button type="submit" class="nexa-auth-primary" id="nexaAuthSubmit">Entrar na Nexa</button>
+    </form>
+    <div class="nexa-auth-actions"><button class="nexa-auth-textbtn" id="nexaAuthToggleRegister" type="button">Criar minha conta</button><button class="nexa-auth-textbtn" id="nexaAuthForgot" type="button">Esqueci a senha</button></div>
+    <div class="nexa-auth-note">Seus dados financeiros continuam salvos <strong>neste dispositivo</strong>. A sincronização entre iPhone e Android será implementada numa próxima etapa.</div>
+   </div>
+   <div id="nexaAuthRecover" hidden>
+    <h3>Nova senha</h3><p class="nexa-auth-muted">Digite sua nova senha para recuperar o acesso à Nexa.</p>
+    <form class="nexa-auth-form" id="nexaAuthRecoverForm"><label for="nexaAuthNewPassword">Nova senha</label><input id="nexaAuthNewPassword" type="password" minlength="6" autocomplete="new-password" required><button class="nexa-auth-primary" type="submit">Salvar minha nova senha</button></form>
+   </div>
+   <div id="nexaAuthProfile" hidden>
+    <h3>Minha conta</h3><p class="nexa-auth-muted">Suas informações de acesso à Nexa IA.</p>
+    <div class="nexa-auth-accountline" id="nexaAuthAccountEmail"></div>
+    <div class="nexa-auth-note"><strong>Plano atual: Nexa Grátis</strong><p style="margin:6px 0 0">O Nexa PRO está em preparação. Nenhuma cobrança está ativada.</p></div>
+    <div class="nexa-auth-buttons">
+     <button type="button" class="nexa-auth-secondary" id="nexaAuthImport">Importar dados antigos deste aparelho</button>
+     <button type="button" class="nexa-auth-secondary" id="nexaAuthGoPro">Conhecer Nexa PRO • R$ 19,90/mês</button>
+     <button type="button" class="nexa-auth-secondary" id="nexaAuthClose">Voltar ao aplicativo</button>
+     <button type="button" class="nexa-auth-secondary" id="nexaAuthLogout">Sair da conta</button>
+    </div>
+    <div class="nexa-auth-note">O login identifica sua conta, mas ainda não envia suas finanças para a nuvem. Guarde seus backups. O botão de importação copia dados antigos sem apagá-los.</div>
+   </div>
+   <div class="nexa-auth-message" id="nexaAuthMessage" role="status"></div>
+  </div>
+  <p class="nexa-auth-offline" id="nexaAuthFootnote">Nexa IA · Privacidade e controle nas suas mãos</p>
+ </div>
+</div><div class="app">
 <header class="top">
  <div class="brand"><div class="logo"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m19 17 .7 1.3L21 19l-1.3.7L19 21l-.7-1.3L17 19l1.3-.7L19 17ZM5 2l.7 1.3L7 4l-1.3.7L5 6l-.7-1.3L3 4l1.3-.7L5 2Z"/></svg></div><div><h1>Nexa <span>IA</span></h1><small>Seu universo, em ordem</small></div></div>
- <div class="top-actions"><button type="button" class="nexa-pro-top" onclick="go('pro')" aria-label="Conhecer Nexa PRO"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l5 4 5-8 5 8 5-4-2 12H4L2 8Z"/><path d="M4 16h16"/></svg> PRO</button><button class="circle" aria-label="Sobre a Nexa IA" onclick="toast('Nexa IA • Assistente pessoal e financeiro')"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg></button><button class="circle" aria-label="Privacidade dos dados" onclick="toast('Seus dados financeiros são guardados neste navegador.')"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></button></div>
+ <div class="top-actions"><button type="button" class="nexa-auth-profile-btn" onclick="nexaAuthOpenAccount()" title="Minha conta" aria-label="Minha conta"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.3"/><path d="M5.5 20v-2.1a6.5 6.5 0 0 1 13 0V20"/></svg></button><button type="button" class="nexa-pro-top" onclick="go('pro')" aria-label="Conhecer Nexa PRO"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l5 4 5-8 5 8 5-4-2 12H4L2 8Z"/><path d="M4 16h16"/></svg> PRO</button><button class="circle" aria-label="Sobre a Nexa IA" onclick="toast('Nexa IA • Assistente pessoal e financeiro')"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg></button><button class="circle" aria-label="Privacidade dos dados" onclick="toast('Seus dados financeiros ainda são guardados neste navegador. O login não ativa a sincronização.')"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></button></div>
 </header>
 <section id="inicio" class="active">
  <p class="eyebrow">SEU ESPAÇO INTELIGENTE</p><h2 class="hello">Seu dia, mais leve. <span aria-hidden="true">✳</span></h2><p class="subtitle">Tudo o que você precisa para cuidar da vida e do dinheiro.</p>
@@ -296,7 +419,7 @@ html, body {
 </nav>
 
 <div id="toast" class="toast" role="status"></div><script>
-const KEY='nexa-prototipo-v1';const API='https://nexa-ia-api.lucasssouzas-051.workers.dev/';let data;try{data=JSON.parse(localStorage.getItem(KEY))||{finance:[],tasks:[],goals:[]}}catch{data={finance:[],tasks:[],goals:[]}}if(!Array.isArray(data.finance))data.finance=[];if(!Array.isArray(data.tasks))data.tasks=[];if(!Array.isArray(data.goals))data.goals=[];const $=id=>document.getElementById(id);const money=n=>(Number(n)||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});const safe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){toast('Não foi possível salvar neste navegador.')}render()}function totals(){let entrada=0,saida=0;for(const f of data.finance){if(f.type==='entrada')entrada+=Number(f.value)||0;else saida+=Number(f.value)||0}return{entrada,saida,saldo:entrada-saida}}function render(){const t=totals();$('saldo').textContent=money(t.saldo);$('entradas').textContent=money(t.entrada);$('saidas').textContent=money(t.saida);$('dica').textContent=data.finance.length===0?'Registre suas receitas e despesas para começar.':t.saida>t.entrada?'Suas despesas registradas superam suas receitas. Reveja seus gastos.':'Continue acompanhando seus lançamentos para organizar seu orçamento.';$('movimentos').innerHTML=data.finance.length?data.finance.map((f,i)=>`<div class="item"><span>${safe(f.desc)}<br><small>${f.type==='entrada'?'Receita':'Despesa'}</small></span><span class="amount ${f.type==='entrada'?'income':'expense'}">${f.type==='saida'?'-':'+'}${money(f.value)} <button class="ghost" onclick="removeFinance(${i})" aria-label="Excluir lançamento">×</button></span></div>`).join(''):'<p class="empty">Nenhum lançamento registrado.</p>';$('tarefas').innerHTML=data.tasks.length?data.tasks.map((v,i)=>`<div class="item"><span>${safe(v)}</span><button class="ghost" onclick="removeTask(${i})">Concluir</button></div>`).join(''):'<p class="empty">Nenhuma tarefa cadastrada.</p>';$('metaslista').innerHTML=data.goals.length?data.goals.map((g,i)=>`<div class="item"><span>${safe(g.name)}<br><small>Objetivo: ${money(g.value)}</small></span><button class="ghost" onclick="removeGoal(${i})">Excluir</button></div>`).join(''):'<p class="empty">Nenhuma meta cadastrada.</p>'}function go(id){document.querySelectorAll('section').forEach(e=>e.classList.toggle('active',e.id===id));document.querySelectorAll('.tabs button').forEach(e=>e.classList.toggle('active',e.dataset.page===id||(id==='bancos'&&e.dataset.page==='financas')));document.documentElement.scrollTop=0;document.body.scrollTop=0;window.scrollTo(0,0)}function quickFinance(type){go('financas');$('tipo').value=type;$('desc').focus()}function addFinance(){const desc=$('desc').value.trim(),value=Number($('valor').value);if(!desc||!Number.isFinite(value)||value<=0)return toast('Informe uma descrição e um valor positivo.');data.finance.unshift({desc,value,type:$('tipo').value});$('desc').value='';$('valor').value='';save();toast('Lançamento registrado!')}function removeFinance(i){data.finance.splice(i,1);save()}function addTask(){const v=$('tarefa').value.trim();if(!v)return toast('Digite a tarefa.');data.tasks.push(v);$('tarefa').value='';save()}function removeTask(i){data.tasks.splice(i,1);save()}function addGoal(){const name=$('meta').value.trim(),value=Number($('alvo').value);if(!name||!Number.isFinite(value)||value<=0)return toast('Informe a meta e um valor positivo.');data.goals.push({name,value});$('meta').value='';$('alvo').value='';save()}function removeGoal(i){data.goals.splice(i,1);save()}let toastTimeout;function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>$('toast').classList.remove('show'),2800)}
+const KEY='nexa-prototipo-v1'+(window.NEXA_USER_STORAGE_SUFFIX||'');const API='https://nexa-ia-api.lucasssouzas-051.workers.dev/';let data;try{data=JSON.parse(localStorage.getItem(KEY))||{finance:[],tasks:[],goals:[]}}catch{data={finance:[],tasks:[],goals:[]}}if(!Array.isArray(data.finance))data.finance=[];if(!Array.isArray(data.tasks))data.tasks=[];if(!Array.isArray(data.goals))data.goals=[];const $=id=>document.getElementById(id);const money=n=>(Number(n)||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});const safe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){toast('Não foi possível salvar neste navegador.')}render()}function totals(){let entrada=0,saida=0;for(const f of data.finance){if(f.type==='entrada')entrada+=Number(f.value)||0;else saida+=Number(f.value)||0}return{entrada,saida,saldo:entrada-saida}}function render(){const t=totals();$('saldo').textContent=money(t.saldo);$('entradas').textContent=money(t.entrada);$('saidas').textContent=money(t.saida);$('dica').textContent=data.finance.length===0?'Registre suas receitas e despesas para começar.':t.saida>t.entrada?'Suas despesas registradas superam suas receitas. Reveja seus gastos.':'Continue acompanhando seus lançamentos para organizar seu orçamento.';$('movimentos').innerHTML=data.finance.length?data.finance.map((f,i)=>`<div class="item"><span>${safe(f.desc)}<br><small>${f.type==='entrada'?'Receita':'Despesa'}</small></span><span class="amount ${f.type==='entrada'?'income':'expense'}">${f.type==='saida'?'-':'+'}${money(f.value)} <button class="ghost" onclick="removeFinance(${i})" aria-label="Excluir lançamento">×</button></span></div>`).join(''):'<p class="empty">Nenhum lançamento registrado.</p>';$('tarefas').innerHTML=data.tasks.length?data.tasks.map((v,i)=>`<div class="item"><span>${safe(v)}</span><button class="ghost" onclick="removeTask(${i})">Concluir</button></div>`).join(''):'<p class="empty">Nenhuma tarefa cadastrada.</p>';$('metaslista').innerHTML=data.goals.length?data.goals.map((g,i)=>`<div class="item"><span>${safe(g.name)}<br><small>Objetivo: ${money(g.value)}</small></span><button class="ghost" onclick="removeGoal(${i})">Excluir</button></div>`).join(''):'<p class="empty">Nenhuma meta cadastrada.</p>'}function go(id){document.querySelectorAll('section').forEach(e=>e.classList.toggle('active',e.id===id));document.querySelectorAll('.tabs button').forEach(e=>e.classList.toggle('active',e.dataset.page===id||(id==='bancos'&&e.dataset.page==='financas')));document.documentElement.scrollTop=0;document.body.scrollTop=0;window.scrollTo(0,0)}function quickFinance(type){go('financas');$('tipo').value=type;$('desc').focus()}function addFinance(){const desc=$('desc').value.trim(),value=Number($('valor').value);if(!desc||!Number.isFinite(value)||value<=0)return toast('Informe uma descrição e um valor positivo.');data.finance.unshift({desc,value,type:$('tipo').value});$('desc').value='';$('valor').value='';save();toast('Lançamento registrado!')}function removeFinance(i){data.finance.splice(i,1);save()}function addTask(){const v=$('tarefa').value.trim();if(!v)return toast('Digite a tarefa.');data.tasks.push(v);$('tarefa').value='';save()}function removeTask(i){data.tasks.splice(i,1);save()}function addGoal(){const name=$('meta').value.trim(),value=Number($('alvo').value);if(!name||!Number.isFinite(value)||value<=0)return toast('Informe a meta e um valor positivo.');data.goals.push({name,value});$('meta').value='';$('alvo').value='';save()}function removeGoal(i){data.goals.splice(i,1);save()}let toastTimeout;function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>$('toast').classList.remove('show'),2800)}
 let chatMessages=[{role:'bot',text:'Olá! 💚 Sou a Nexa IA, sua assistente pessoal e financeira. Como posso ajudar você hoje?'}];let busy=false;function renderChat(){const box=$('chatHistory');box.replaceChildren();for(const m of chatMessages){const el=document.createElement('div');el.className='bubble '+m.role+(m.error?' error':'');el.textContent=m.text;box.appendChild(el)}box.scrollTop=box.scrollHeight}function newChat(){if(busy)return toast('Aguarde a resposta atual.');chatMessages=[{role:'bot',text:'Nova conversa iniciada! ✨ Como posso ajudar?'}];$('pergunta').value='';renderChat()}function ask(q){$('pergunta').value=q;responder()}async function responder(){if(busy)return;const field=$('pergunta');const raw=field.value.trim();if(!raw)return;if(raw.length>2000)return toast('Envie uma mensagem de até 2.000 caracteres.');chatMessages.push({role:'user',text:raw});field.value='';busy=true;$('sendButton').disabled=true;$('aiStatus').textContent='● Nexa está pensando...';chatMessages.push({role:'bot',text:'Digitando...'});renderChat();try{const response=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:raw})});let payload;try{payload=await response.json()}catch{throw new Error('Resposta inválida do servidor.')}if(!response.ok)throw new Error(payload.error||'Não foi possível consultar a IA.');chatMessages[chatMessages.length-1]={role:'bot',text:String(payload.reply||'Não recebi uma resposta.')};}catch(e){chatMessages[chatMessages.length-1]={role:'bot',error:true,text:'Não consegui me conectar agora. Confira a configuração do servidor e tente novamente.'};console.error('Erro Nexa IA:',e)}finally{busy=false;$('sendButton').disabled=false;$('aiStatus').textContent='● Pronta para conversar';renderChat()}}$('pergunta').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();responder()}});render();renderChat();
 (function(){
 const responderOriginal=responder;
@@ -551,7 +674,7 @@ el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();listar(tipo
 });
 })();
 (function(){
-const MEMORIA='nexa-memoria-v1';
+const MEMORIA='nexa-memoria-v1'+(window.NEXA_USER_STORAGE_SUFFIX||'');
 const renderAnterior=renderChat;
 try{
 const historico=JSON.parse(localStorage.getItem(MEMORIA));
@@ -633,7 +756,7 @@ renderChat();
 
 /* Área bancária independente: não duplica lançamentos financeiros existentes. */
 (function(){
-const KEYBANK='nexa-banking-v1';let bank;
+const KEYBANK='nexa-banking-v1'+(window.NEXA_USER_STORAGE_SUFFIX||'');let bank;
 try{bank=JSON.parse(localStorage.getItem(KEYBANK))||{accounts:[],transactions:[]}}catch{bank={accounts:[],transactions:[]}}
 if(!Array.isArray(bank.accounts))bank.accounts=[];if(!Array.isArray(bank.transactions))bank.transactions=[];
 const today=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
@@ -899,7 +1022,7 @@ $('bankTxDate').value=today();bankRender();
   const $=id=>document.getElementById(id);
   const endpoint=$('nexaOfWorkerUrl'),password=$('nexaOfPassword'),button=$('nexaOfSyncButton'),status=$('nexaOfStatus');
   if(!endpoint||!password||!button||!status)return;
-  const STORAGE='nexa-open-finance-worker-url-v1';
+  const STORAGE='nexa-open-finance-worker-url-v1'+(window.NEXA_USER_STORAGE_SUFFIX||'');
   const setStatus=(msg,state='')=>{status.textContent=msg;status.dataset.state=state};
   try{endpoint.value=localStorage.getItem(STORAGE)||''}catch(e){}
   $('nexaOfClearButton').addEventListener('click',()=>{endpoint.value='';password.value='';try{localStorage.removeItem(STORAGE)}catch(e){}setStatus('Endereço esquecido neste dispositivo. Dados já sincronizados permanecem no histórico.');});
@@ -931,7 +1054,7 @@ $('bankTxDate').value=today();bankRender();
  */
 (function(){
   'use strict';
-  const QUOTA_KEY='nexa-free-messages-v1';
+  const QUOTA_KEY='nexa-free-messages-v1'+(window.NEXA_USER_STORAGE_SUFFIX||'');
   const FREE_CHAT_LIMIT=10;
   const FREE_GOAL_LIMIT=2;
   const localDay=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
@@ -1000,4 +1123,217 @@ $('bankTxDate').value=today();bankRender();
   window.nexaMembership={plan:'free-preview',priceBRL:19.90,chatLimit:FREE_CHAT_LIMIT,goalLimit:FREE_GOAL_LIMIT,usage:()=>({messagesToday:messagesUsed(),goals:data.goals.length})};
 })();
 
+</script><script>
+/* Nexa ID - Supabase Auth por email/senha. Sem backend de dados financeiros nesta etapa. */
+(function(){
+ 'use strict';
+ const $=id=>document.getElementById(id);
+ const gate=$('nexaAuthGate'),message=$('nexaAuthMessage');
+ const UI=['nexaAuthLoading','nexaAuthSetup','nexaAuthLogin','nexaAuthRecover','nexaAuthProfile','nexaAuthLocal','nexaAuthLocalProfile'];
+ const CONFIG_KEY='nexa-supabase-public-config-v1';
+ const ACTIVE_KEY='nexa-auth-active-user-v1';
+ let client=null,user=null, registering=false, pendingRecovery=false, configured=false;
+ const text=(value,kind='')=>{message.textContent=value||'';message.className='nexa-auth-message '+kind;};
+ const show=which=>{for(const id of UI)$(id).hidden=id!==which;text('');gate.classList.add('is-visible');};
+ const displayGate=(showIt)=>{
+   gate.classList.toggle('is-visible',!!showIt);
+   document.body.classList.toggle('nexa-auth-panel',!!showIt);
+ };
+ const publicConfig=window.NEXA_SUPABASE_PUBLIC||{};
+ let localConfig={};try{localConfig=JSON.parse(localStorage.getItem(CONFIG_KEY)||'{}')||{};}catch(e){}
+ const config=(String(publicConfig.url||'').trim()&&String(publicConfig.publishableKey||'').trim())?publicConfig:localConfig;
+ const normalizeUrl=url=>{const u=new URL(url);if(u.protocol!=='https:'||!/^[a-z0-9-]+\.supabase\.co$/i.test(u.hostname)||u.username||u.password||u.search||u.hash||u.pathname!=='/')throw Error('Use a URL HTTPS do seu projeto Supabase, terminada em .supabase.co.');return u.origin;};
+ const validConfig=cfg=>{try{return !!(normalizeUrl(String(cfg.url||'').trim())&&/^sb_publishable_[A-Za-z0-9_\-]+$/.test(String(cfg.publishableKey||'').trim()))}catch(e){return false;}};
+ const getRedirect=()=>window.location.origin+window.location.pathname;
+ const msgError=(error)=>{
+   const raw=String(error?.message||error||'Erro desconhecido');
+   if(/invalid login credentials/i.test(raw))return 'E-mail ou senha incorretos.';
+   if(/email not confirmed/i.test(raw))return 'Confirme seu e-mail pelo link enviado antes de entrar.';
+   if(/user already registered/i.test(raw))return 'Este e-mail já está cadastrado. Tente entrar.';
+   if(/password should be at least/i.test(raw))return 'Escolha uma senha mais longa.';
+   if(/rate limit|too many/i.test(raw))return 'Muitas tentativas. Tente novamente mais tarde.';
+   if(/failed to fetch|network|fetch failed/i.test(raw))return 'Sem conexão com o Supabase. Confira a internet e as configurações.';
+   return raw.slice(0,220);
+ };
+ const authenticated=async account=>{
+   if(!account||!account.id)throw Error('Sua identidade não foi validada.');
+   user=account;
+   const old=localStorage.getItem(ACTIVE_KEY)||'';
+   if(old!==user.id){localStorage.setItem(ACTIVE_KEY,user.id);window.location.reload();return;}
+   document.body.classList.remove('nexa-auth-loading');
+   displayGate(false);
+   window.nexaAuthUser={id:user.id,email:user.email||''};
+ };
+ const lock=()=>{document.body.classList.add('nexa-auth-loading');show('nexaAuthLogin');};
+ const unlockDemo=()=>{document.body.classList.remove('nexa-auth-loading');displayGate(false);};
+ const emailField=$('nexaAuthEmail'),passField=$('nexaAuthPassword');
+ const registerView=state=>{
+   registering=state;
+   $('nexaAuthLoginTitle').textContent=state?'Crie sua conta Nexa':'Bem-vindo de volta';
+   $('nexaAuthLoginHint').textContent=state?'Comece com seu e-mail e uma senha segura.':'Entre para acessar sua conta Nexa.';
+   $('nexaAuthSubmit').textContent=state?'Cadastrar grátis':'Entrar na Nexa';
+   $('nexaAuthToggleRegister').textContent=state?'Já tenho uma conta':'Criar minha conta';
+   passField.autocomplete=state?'new-password':'current-password';
+   text('');
+ };
+ const loadLibrary=()=>new Promise((resolve,reject)=>{
+   if(window.supabase&&typeof window.supabase.createClient==='function')return resolve();
+   const script=document.createElement('script');script.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';script.async=true;
+   script.onload=()=>window.supabase?.createClient?resolve():reject(new Error('Biblioteca de login indisponível.'));
+   script.onerror=()=>reject(new Error('Não foi possível carregar o sistema de login. Confira a conexão.'));
+   document.head.appendChild(script);
+ });
+ async function initialize(){
+   configured=validConfig(config);
+   if(!configured){unlockDemo();return;}
+   lock();show('nexaAuthLoading');
+   try{
+     await loadLibrary();
+     client=window.supabase.createClient(normalizeUrl(config.url),config.publishableKey,{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}});
+     window.nexaAuthClient=client;
+     client.auth.onAuthStateChange((event,session)=>{
+       if(event==='PASSWORD_RECOVERY'){
+         pendingRecovery=true;
+         show('nexaAuthRecover');
+       }
+     });
+     const {data,error}=await client.auth.getUser();
+     if(error && !/auth session missing/i.test(error.message||'')){
+       if(/invalid|expired|refresh token not found/i.test(error.message||'')){
+         await client.auth.signOut({scope:'local'}).catch(()=>{});
+       }else{lock();text('Não foi possível validar a sessão. Confira sua conexão e recarregue a Nexa.','error');return;}
+     }
+     if(data?.user){await authenticated(data.user);if(pendingRecovery)show('nexaAuthRecover');}
+     else {
+       if(localStorage.getItem(ACTIVE_KEY)){localStorage.removeItem(ACTIVE_KEY);window.location.reload();return;}
+       lock();
+     }
+   }catch(error){lock();text(msgError(error),'error');}
+ }
+ /* Perfil de demonstração: sem senha e sem autenticação real. */
+ const LOCAL_PROFILE_KEY='nexa-local-profile-v1';
+ const readLocalProfile=()=>{
+   try{
+     const result=JSON.parse(localStorage.getItem(LOCAL_PROFILE_KEY)||'null');
+     if(result&&typeof result.name==='string'&&typeof result.email==='string')return result;
+   }catch(error){}
+   return null;
+ };
+ const openLocalProfile=()=>{
+   const p=readLocalProfile();
+   if(p){
+     $('nexaLocalProfileName').textContent=p.name.split(/\s+/)[0]||p.name;
+     $('nexaLocalProfileFullName').textContent=p.name;
+     $('nexaLocalProfileEmail').textContent=p.email;
+     show('nexaAuthLocalProfile');
+   }else{
+     $('nexaLocalName').value='';$('nexaLocalEmail').value='';
+     show('nexaAuthLocal');
+   }
+   displayGate(true);
+ };
+ function openAccount(){
+   if(!configured){openLocalProfile();return;}
+   displayGate(true);
+   if(user){$('nexaAuthAccountEmail').textContent=user.email||'Conta autenticada';show('nexaAuthProfile');}
+   else{show('nexaAuthLogin');}
+ }
+ window.nexaAuthOpenAccount=openAccount;
+ $('nexaAuthLocalForm').addEventListener('submit',event=>{
+   event.preventDefault();
+   const name=$('nexaLocalName').value.trim().replace(/\s+/g,' ');
+   const email=$('nexaLocalEmail').value.trim().toLowerCase();
+   if(name.length<2)return text('Digite seu nome com pelo menos 2 letras.','error');
+   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return text('Digite um e-mail válido.','error');
+   try{
+     localStorage.setItem(LOCAL_PROFILE_KEY,JSON.stringify({name,email,updatedAt:new Date().toISOString()}));
+     openLocalProfile();
+     text('Perfil salvo neste iPhone. Você já pode usar a Nexa!','ok');
+   }catch(error){text('Não foi possível salvar o perfil. Confira o armazenamento do navegador.','error');}
+ });
+ $('nexaLocalCancel').addEventListener('click',()=>displayGate(false));
+ $('nexaLocalClose').addEventListener('click',()=>displayGate(false));
+ $('nexaLocalEdit').addEventListener('click',()=>{
+   const profile=readLocalProfile();
+   $('nexaLocalName').value=profile?.name||'';
+   $('nexaLocalEmail').value=profile?.email||'';
+   show('nexaAuthLocal');
+ });
+ $('nexaLocalDelete').addEventListener('click',()=>{
+   if(!confirm('Apagar somente seu nome e e-mail deste navegador? Seus registros financeiros não serão apagados.'))return;
+   localStorage.removeItem(LOCAL_PROFILE_KEY);
+   openLocalProfile();
+   text('Perfil apagado. Os seus dados financeiros continuam salvos aqui.','ok');
+ });
+ $('nexaLocalPro').addEventListener('click',()=>{
+   displayGate(false);
+   if(typeof window.go==='function')window.go('pro');
+ });
+ $('nexaAuthBackSetup').addEventListener('click',()=>displayGate(false));
+ $('nexaAuthSetupForm').addEventListener('submit',event=>{
+   event.preventDefault();
+   const url=$('nexaSbUrl').value.trim(),publishableKey=$('nexaSbKey').value.trim();
+   try{const cleanUrl=normalizeUrl(url);if(!/^sb_publishable_[A-Za-z0-9_\-]+$/.test(publishableKey))throw Error('Copie a Publishable key, iniciada por sb_publishable_. Nunca use a chave secreta.');
+      localStorage.setItem(CONFIG_KEY,JSON.stringify({url:cleanUrl,publishableKey}));window.location.reload();
+   }catch(error){text(msgError(error),'error')}
+ });
+ $('nexaAuthToggleRegister').addEventListener('click',()=>registerView(!registering));
+ $('nexaAuthForgot').addEventListener('click',async()=>{
+   if(!client)return text('Configure primeiro o Supabase.','error');
+   const email=emailField.value.trim().toLowerCase();
+   if(!/^\S+@\S+\.\S+$/.test(email))return text('Digite seu e-mail no campo acima.','error');
+   text('Enviando instruções...');
+   try{const {error}=await client.auth.resetPasswordForEmail(email,{redirectTo:getRedirect()});if(error)throw error;text('Se a conta existir, você receberá um e-mail para redefinir sua senha.','ok');}
+   catch(error){text(msgError(error),'error')}
+ });
+ $('nexaAuthLoginForm').addEventListener('submit',async event=>{
+   event.preventDefault();if(!client)return text('Sistema de autenticação indisponível. Recarregue a página.','error');
+   const email=emailField.value.trim().toLowerCase(),password=passField.value;
+   if(password.length<6)return text('A senha precisa ter pelo menos 6 caracteres.','error');
+   const button=$('nexaAuthSubmit');button.disabled=true;text('Aguarde, verificando sua conta...');
+   try{
+     if(registering){
+       const {data,error}=await client.auth.signUp({email,password,options:{emailRedirectTo:getRedirect()}});if(error)throw error;
+       passField.value='';
+       if(data?.session&&data?.user){await authenticated(data.user);return;}
+       registerView(false);text('Conta criada! Abra seu e-mail e confirme o cadastro. Depois volte para entrar.','ok');
+     }else{
+       const {data,error}=await client.auth.signInWithPassword({email,password});if(error)throw error;
+       passField.value='';await authenticated(data.user);
+     }
+   }catch(error){text(msgError(error),'error')}
+   finally{button.disabled=false;}
+ });
+ $('nexaAuthRecoverForm').addEventListener('submit',async event=>{
+   event.preventDefault();if(!client)return;
+   const newPassword=$('nexaAuthNewPassword').value;
+   if(newPassword.length<6)return text('A senha precisa ter pelo menos 6 caracteres.','error');
+   try{const {error}=await client.auth.updateUser({password:newPassword});if(error)throw error;
+     $('nexaAuthNewPassword').value='';pendingRecovery=false;text('Senha atualizada com sucesso.','ok');
+     if(user){setTimeout(()=>{displayGate(false);},1300);}else show('nexaAuthLogin');
+   }catch(error){text(msgError(error),'error')}
+ });
+ $('nexaAuthLogout').addEventListener('click',async()=>{
+   if(!client)return;const b=$('nexaAuthLogout');b.disabled=true;
+   try{const {error}=await client.auth.signOut();if(error)throw error;
+     localStorage.removeItem(ACTIVE_KEY);window.location.reload();
+   }catch(error){text(msgError(error),'error');b.disabled=false;}
+ });
+ $('nexaAuthClose').addEventListener('click',()=>displayGate(false));
+ $('nexaAuthGoPro').addEventListener('click',()=>{displayGate(false);if(typeof window.go==='function')window.go('pro');});
+ $('nexaAuthImport').addEventListener('click',()=>{
+   if(!user)return;
+   const suffix=window.NEXA_USER_STORAGE_SUFFIX;
+   if(!suffix||suffix!==':'+user.id)return text('Verifique sua sessão e tente novamente.','error');
+   const bases=['nexa-prototipo-v1','nexa-banking-v1','nexa-memoria-v1'];
+   const originals=bases.filter(key=>localStorage.getItem(key)!==null);
+   if(!originals.length)return text('Não há dados antigos para importar deste aparelho.','error');
+   const active=bases.filter(key=>localStorage.getItem(key+suffix)!==null);
+   if(active.length)return text('Esta conta já possui registros locais. Para evitar perda de dados, a importação automática foi bloqueada. Faça um backup antes de tentar combinar os registros.','error');
+   if(!confirm('Importar os dados antigos deste iPhone para a conta '+(user.email||'atual')+'?\n\nOs registros originais serão mantidos e NÃO serão enviados à nuvem.'))return;
+   try{for(const key of originals)localStorage.setItem(key+suffix,localStorage.getItem(key));window.location.reload();}
+   catch(error){text('Não foi possível copiar os dados. Verifique o armazenamento do Safari.','error')}
+ });
+ if(validConfig(config)){initialize();}else unlockDemo();
+})();
 </script></body></html>
