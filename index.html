@@ -183,4 +183,85 @@ grafico.appendChild(linha);
 botao.onclick=atualizarGrafico;
 atualizarGrafico();
 })();
+(function(){
+const modal=document.createElement('div');
+modal.style.cssText='display:none;position:fixed;inset:0;z-index:100;background:#000b;align-items:center;justify-content:center;padding:18px';
+const caixa=document.createElement('div');
+caixa.style.cssText='background:#14221c;color:white;border:1px solid #376049;border-radius:22px;padding:20px;width:100%;max-width:440px;max-height:80vh;overflow:auto';
+const cab=document.createElement('div');
+cab.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:12px';
+const titulo=document.createElement('h3');
+const fechar=document.createElement('button');
+fechar.textContent='✕';
+fechar.type='button';
+fechar.setAttribute('aria-label','Fechar');
+fechar.style.cssText='background:#263b30;color:white;border:0;border-radius:10px;padding:10px';
+const conteudo=document.createElement('div');
+conteudo.style.marginTop='15px';
+cab.append(titulo,fechar);
+caixa.append(cab,conteudo);
+modal.appendChild(caixa);
+document.body.appendChild(modal);
+function fecharModal(){modal.style.display='none'}
+fechar.onclick=fecharModal;
+modal.onclick=e=>{if(e.target===modal)fecharModal()};
+function abrir(nome){
+titulo.textContent=nome;
+conteudo.replaceChildren();
+modal.style.display='flex';
+}
+function listar(tipo){
+abrir(tipo==='entrada'?'↗ Entradas':'↘ Saídas');
+const itens=data.finance.filter(r=>r.type===tipo);
+if(!itens.length){conteudo.textContent='Nenhum lançamento registrado.';return}
+const total=itens.reduce((s,r)=>s+(Number(r.value)||0),0);
+const soma=document.createElement('h2');
+soma.textContent=money(total);
+soma.style.color=tipo==='entrada'?'#38e99c':'#ff929e';
+conteudo.appendChild(soma);
+for(const r of itens){
+const linha=document.createElement('div');
+linha.style.cssText='padding:12px 0;border-bottom:1px solid #34463b';
+const nome=document.createElement('strong');
+nome.textContent=r.desc;
+const detalhes=document.createElement('div');
+detalhes.style.cssText='color:#b9cbc0;font-size:13px;margin-top:5px';
+detalhes.textContent=money(r.value)+(r.category?' • '+r.category:'')+(r.date?' • '+r.date:'');
+linha.append(nome,detalhes);
+conteudo.appendChild(linha);
+}
+}
+function configuracoes(){
+abrir('⚙️ Configurações da Nexa');
+const info=document.createElement('p');
+info.textContent='Seus registros ficam neste navegador. Faça backups periódicos para protegê-los.';
+conteudo.appendChild(info);
+const backup=document.createElement('button');
+backup.type='button';
+backup.className='primary';
+backup.textContent='🔐 Abrir backup e restauração';
+backup.onclick=()=>{
+fecharModal();
+go('inicio');
+document.getElementById('nexaExportar')?.scrollIntoView({behavior:'smooth',block:'center'});
+};
+conteudo.appendChild(backup);
+}
+const engrenagem=document.querySelector('.top-actions button[aria-label="Configurações"]');
+if(engrenagem){
+engrenagem.removeAttribute('onclick');
+engrenagem.onclick=configuracoes;
+}
+const cards=document.querySelectorAll('#inicio .grid .card');
+['entrada','saida'].forEach((tipo,i)=>{
+const el=cards[i];
+if(!el)return;
+el.style.cursor='pointer';
+el.setAttribute('role','button');
+el.setAttribute('tabindex','0');
+el.setAttribute('aria-label',tipo==='entrada'?'Ver entradas':'Ver saídas');
+el.onclick=()=>listar(tipo);
+el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();listar(tipo)}};
+});
+})();
 </script></body></html>
