@@ -131,4 +131,56 @@ toast('Backup restaurado com sucesso!');
 finally{arquivo.value=''}
 };
 })();
+ (function(){
+const painel=document.createElement('section');
+painel.style.cssText='background:#12241d;color:#fff;border:1px solid #27523c;border-radius:18px;padding:18px;margin:16px 0';
+const titulo=document.createElement('h3');
+titulo.textContent='📊 Gastos por categoria';
+titulo.style.margin='0 0 12px';
+const grafico=document.createElement('div');
+const botao=document.createElement('button');
+botao.textContent='↻ Atualizar gráfico';
+botao.type='button';
+botao.style.cssText='margin-top:12px;padding:10px;border-radius:10px;background:#176b49;color:white;border:0';
+painel.append(titulo,grafico,botao);
+const inicio=document.getElementById('inicio');
+if(!inicio)return;
+inicio.appendChild(painel);
+function atualizarGrafico(){
+grafico.replaceChildren();
+const mes=new Date().toLocaleDateString('sv-SE').slice(0,7);
+const itens=(Array.isArray(data.finance)?data.finance:[]).filter(r=>r.type==='saida'&&typeof r.date==='string'&&r.date.slice(0,7)===mes);
+const totais={};
+for(const item of itens){
+const categoria=item.category||'Sem categoria';
+totais[categoria]=(totais[categoria]||0)+(Number(item.value)||0);
+}
+const grupos=Object.entries(totais).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);
+if(!grupos.length){
+grafico.textContent='Nenhuma despesa datada neste mês.';
+return;
+}
+const maximo=grupos[0][1];
+for(const [nome,valor] of grupos){
+const linha=document.createElement('div');
+linha.style.marginBottom='14px';
+const rotulo=document.createElement('div');
+rotulo.style.cssText='display:flex;justify-content:space-between;gap:8px;font-size:13px;margin-bottom:5px';
+const categoria=document.createElement('span');
+categoria.textContent=nome;
+const quantia=document.createElement('strong');
+quantia.textContent=valor.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+rotulo.append(categoria,quantia);
+const trilho=document.createElement('div');
+trilho.style.cssText='height:12px;background:#30463a;border-radius:20px;overflow:hidden';
+const barra=document.createElement('div');
+barra.style.cssText='height:100%;background:#30cf83;border-radius:20px;width:'+((valor/maximo)*100)+'%';
+trilho.appendChild(barra);
+linha.append(rotulo,trilho);
+grafico.appendChild(linha);
+}
+}
+botao.onclick=atualizarGrafico;
+atualizarGrafico();
+})();
 </script></body></html>
