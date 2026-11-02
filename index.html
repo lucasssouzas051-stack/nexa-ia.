@@ -12,4 +12,37 @@
 <script>
 const KEY='nexa-prototipo-v1';const API='https://nexa-ia-api.lucasssouzas-051.workers.dev/';let data;try{data=JSON.parse(localStorage.getItem(KEY))||{finance:[],tasks:[],goals:[]}}catch{data={finance:[],tasks:[],goals:[]}}if(!Array.isArray(data.finance))data.finance=[];if(!Array.isArray(data.tasks))data.tasks=[];if(!Array.isArray(data.goals))data.goals=[];const $=id=>document.getElementById(id);const money=n=>(Number(n)||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});const safe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){toast('Não foi possível salvar neste navegador.')}render()}function totals(){let entrada=0,saida=0;for(const f of data.finance){if(f.type==='entrada')entrada+=Number(f.value)||0;else saida+=Number(f.value)||0}return{entrada,saida,saldo:entrada-saida}}function render(){const t=totals();$('saldo').textContent=money(t.saldo);$('entradas').textContent=money(t.entrada);$('saidas').textContent=money(t.saida);$('dica').textContent=data.finance.length===0?'Registre suas receitas e despesas para começar.':t.saida>t.entrada?'Suas despesas registradas superam suas receitas. Reveja seus gastos.':'Continue acompanhando seus lançamentos para organizar seu orçamento.';$('movimentos').innerHTML=data.finance.length?data.finance.map((f,i)=>`<div class="item"><span>${safe(f.desc)}<br><small>${f.type==='entrada'?'Receita':'Despesa'}</small></span><span class="amount ${f.type==='entrada'?'income':'expense'}">${f.type==='saida'?'-':'+'}${money(f.value)} <button class="ghost" onclick="removeFinance(${i})" aria-label="Excluir lançamento">×</button></span></div>`).join(''):'<p class="empty">Nenhum lançamento registrado.</p>';$('tarefas').innerHTML=data.tasks.length?data.tasks.map((v,i)=>`<div class="item"><span>${safe(v)}</span><button class="ghost" onclick="removeTask(${i})">Concluir</button></div>`).join(''):'<p class="empty">Nenhuma tarefa cadastrada.</p>';$('metaslista').innerHTML=data.goals.length?data.goals.map((g,i)=>`<div class="item"><span>${safe(g.name)}<br><small>Objetivo: ${money(g.value)}</small></span><button class="ghost" onclick="removeGoal(${i})">Excluir</button></div>`).join(''):'<p class="empty">Nenhuma meta cadastrada.</p>'}function go(id){document.querySelectorAll('section').forEach(e=>e.classList.toggle('active',e.id===id));document.querySelectorAll('.tabs button').forEach(e=>e.classList.toggle('active',e.dataset.page===id));window.scrollTo(0,0)}function quickFinance(type){go('financas');$('tipo').value=type;$('desc').focus()}function addFinance(){const desc=$('desc').value.trim(),value=Number($('valor').value);if(!desc||!Number.isFinite(value)||value<=0)return toast('Informe uma descrição e um valor positivo.');data.finance.unshift({desc,value,type:$('tipo').value});$('desc').value='';$('valor').value='';save();toast('Lançamento registrado!')}function removeFinance(i){data.finance.splice(i,1);save()}function addTask(){const v=$('tarefa').value.trim();if(!v)return toast('Digite a tarefa.');data.tasks.push(v);$('tarefa').value='';save()}function removeTask(i){data.tasks.splice(i,1);save()}function addGoal(){const name=$('meta').value.trim(),value=Number($('alvo').value);if(!name||!Number.isFinite(value)||value<=0)return toast('Informe a meta e um valor positivo.');data.goals.push({name,value});$('meta').value='';$('alvo').value='';save()}function removeGoal(i){data.goals.splice(i,1);save()}let toastTimeout;function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>$('toast').classList.remove('show'),2800)}
 let chatMessages=[{role:'bot',text:'Olá! 💚 Sou a Nexa IA, sua assistente pessoal e financeira. Como posso ajudar você hoje?'}];let busy=false;function renderChat(){const box=$('chatHistory');box.replaceChildren();for(const m of chatMessages){const el=document.createElement('div');el.className='bubble '+m.role+(m.error?' error':'');el.textContent=m.text;box.appendChild(el)}box.scrollTop=box.scrollHeight}function newChat(){if(busy)return toast('Aguarde a resposta atual.');chatMessages=[{role:'bot',text:'Nova conversa iniciada! ✨ Como posso ajudar?'}];$('pergunta').value='';renderChat()}function ask(q){$('pergunta').value=q;responder()}async function responder(){if(busy)return;const field=$('pergunta');const raw=field.value.trim();if(!raw)return;if(raw.length>2000)return toast('Envie uma mensagem de até 2.000 caracteres.');chatMessages.push({role:'user',text:raw});field.value='';busy=true;$('sendButton').disabled=true;$('aiStatus').textContent='● Nexa está pensando...';chatMessages.push({role:'bot',text:'Digitando...'});renderChat();try{const response=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:raw})});let payload;try{payload=await response.json()}catch{throw new Error('Resposta inválida do servidor.')}if(!response.ok)throw new Error(payload.error||'Não foi possível consultar a IA.');chatMessages[chatMessages.length-1]={role:'bot',text:String(payload.reply||'Não recebi uma resposta.')};}catch(e){chatMessages[chatMessages.length-1]={role:'bot',error:true,text:'Não consegui me conectar agora. Confira a configuração do servidor e tente novamente.'};console.error('Erro Nexa IA:',e)}finally{busy=false;$('sendButton').disabled=false;$('aiStatus').textContent='● Pronta para conversar';renderChat()}}$('pergunta').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();responder()}});render();renderChat();
+(function(){
+const responderOriginal=responder;
+responder=async function(){
+const campo=$('pergunta');
+const texto=campo.value.trim();
+if(!texto||busy)return;
+const consulta=/quanto (tenho|gastei|recebi)|qual (meu saldo|é meu saldo)|saldo (atual|registrado)/i.test(texto);
+const tipo=/\b(gastei|paguei|comprei|desembolsei)\b/i.test(texto)?'saida':/\b(recebi|ganhei|vendi)\b/i.test(texto)?'entrada':null;
+const valorTexto=texto.match(/(?:R\$\s*)?(\d{1,3}(?:\.\d{3})*(?:,\d{1,2})?|\d+(?:[.,]\d{1,2})?)/);
+if(!consulta&&(!tipo||!valorTexto))return responderOriginal();
+chatMessages.push({role:'user',text:texto});
+campo.value='';
+if(consulta){
+const t=totals();
+chatMessages.push({role:'bot',text:'Seu saldo registrado é '+money(t.saldo)+'.\nReceitas: '+money(t.entrada)+'.\nDespesas: '+money(t.saida)+'.'});
+renderChat();return;
+}
+const valor=Number(valorTexto[1].replace(/\./g,'').replace(',','.'));
+if(!Number.isFinite(valor)||valor<=0)return responderOriginal();
+let desc=texto.replace(/R\$\s*/gi,'').replace(valorTexto[1],'').replace(/\b(gastei|paguei|comprei|desembolsei|recebi|ganhei|vendi)\b/gi,'').replace(/^\s*(de|com|por|um|uma)\s+/i,'').replace(/\b(hoje|ontem)\b/gi,'').trim();
+desc=desc||'Lançamento pela Nexa';
+const nome=tipo==='saida'?'despesa':'receita';
+const aprovado=confirm('Confirmar '+nome+'?\n\n'+desc+'\n'+money(valor));
+if(aprovado){
+data.finance.unshift({desc,value:valor,type:tipo});
+save();
+chatMessages.push({role:'bot',text:'✅ '+(tipo==='saida'?'Despesa':'Receita')+' registrada!\n'+desc+' — '+money(valor)});
+}else{
+chatMessages.push({role:'bot',text:'Tudo bem! O lançamento foi cancelado.'});
+}
+renderChat();
+};
+})();
 </script></body></html>
