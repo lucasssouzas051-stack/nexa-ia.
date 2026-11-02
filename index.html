@@ -88,4 +88,47 @@ campo.value='';
 renderChat();
 };
 })();
+(function(){
+const painel=document.createElement('div');
+painel.className='card';
+painel.innerHTML='<b>🔐 Backup da Nexa IA</b><p style="color:#a2b4ac;font-size:14px">Salve seus dados em um arquivo e restaure quando precisar.</p><button id="nexaExportar" class="primary" type="button">⬇ Salvar backup</button> <button id="nexaImportar" class="ghost" type="button">⬆ Restaurar</button><input type="file" id="nexaArquivo" accept=".json,application/json" style="display:none">';
+document.getElementById('inicio').appendChild(painel);
+const arquivo=document.getElementById('nexaArquivo');
+document.getElementById('nexaExportar').onclick=async()=>{
+const conteudo=JSON.stringify({app:'Nexa IA',version:1,createdAt:new Date().toISOString(),data:{finance:data.finance,tasks:data.tasks,goals:data.goals}},null,2);
+const nome='nexa-backup-'+new Date().toISOString().slice(0,10)+'.json';
+const blob=new Blob([conteudo],{type:'application/json'});
+const file=new File([blob],nome,{type:'application/json'});
+if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+try{await navigator.share({files:[file],title:'Backup Nexa IA'});return}
+catch(e){if(e.name==='AbortError')return}
+}
+const url=URL.createObjectURL(blob);
+const a=document.createElement('a');
+a.href=url;a.download=nome;
+document.body.appendChild(a);a.click();a.remove();
+setTimeout(()=>URL.revokeObjectURL(url),30000);
+toast('Salve o arquivo em um local seguro.');
+};
+document.getElementById('nexaImportar').onclick=()=>arquivo.click();
+arquivo.onchange=async()=>{
+const f=arquivo.files[0];
+if(!f)return;
+try{
+if(f.size>2000000)throw Error('Arquivo muito grande.');
+const backup=JSON.parse(await f.text());
+const d=backup.data;
+if(backup.app!=='Nexa IA'||backup.version!==1||!d||!Array.isArray(d.finance)||!Array.isArray(d.tasks)||!Array.isArray(d.goals))throw Error('Backup incompatível.');
+const valido=d.finance.every(x=>x&&typeof x.desc==='string'&&x.desc.length<=2000&&['entrada','saida'].includes(x.type)&&Number.isFinite(x.value)&&x.value>0&&(x.date===undefined||typeof x.date==='string')&&(x.category===undefined||typeof x.category==='string'))&&d.tasks.every(x=>typeof x==='string'&&x.length<=2000)&&d.goals.every(x=>x&&typeof x.name==='string'&&Number.isFinite(x.value)&&x.value>0);
+if(!valido)throw Error('Dados inválidos no backup.');
+if(!confirm('Restaurar este backup? Os dados atuais serão substituídos. Salve antes uma cópia deles.'))return;
+const novos={finance:d.finance,tasks:d.tasks,goals:d.goals};
+localStorage.setItem(KEY,JSON.stringify(novos));
+data=novos;
+render();
+toast('Backup restaurado com sucesso!');
+}catch(e){alert('Não foi possível restaurar: '+e.message)}
+finally{arquivo.value=''}
+};
+})();
 </script></body></html>
