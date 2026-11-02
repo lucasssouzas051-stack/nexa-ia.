@@ -396,10 +396,10 @@ window.NEXA_USER_STORAGE_SUFFIX = (function(){
         <li>Planejamento personalizado</li>
         <li>Análises e alertas inteligentes</li>
       </ul>
-      <button type="button" class="nexa-pro-action" onclick="nexaCheckoutInfo()">Quero assinar PRO</button>
+      <button type="button" class="nexa-pro-action" onclick="nexaCheckoutInfo()">Ver pagamento no PagBank</button>
     </div>
   </div>
-  <div class="nexa-pro-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg><span><b>Etapa de preparação.</b> Ainda não é possível comprar o plano. A ativação exigirá login, pagamentos recorrentes e confirmação da assinatura pelo servidor — sem cobrar ninguém nesta versão.</span></div>
+  <div class="nexa-pro-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg><span><b>Pagamento PagBank para conferência.</b> Este botão abre uma cobrança real, mas o PRO ainda não é liberado após pagar. Não pague nem divulgue o link antes de confirmar a recorrência e configurar a verificação segura da assinatura.</span></div>
   <p class="eyebrow">RECURSOS EXCLUSIVOS</p>
   <div class="nexa-pro-features">
     <div class="nexa-pro-feature"><div class="symbol">▥</div><div class="detail"><b>Relatórios inteligentes</b><p>Comparativos, categorias de gastos e evolução financeira.</p></div><button type="button" class="nexa-pro-lock" onclick="nexaCheckoutInfo()">Em breve</button></div>
@@ -1079,7 +1079,8 @@ $('bankTxDate').value=today();bankRender();
   }
   window.nexaCheckoutInfo=function(){
     go('pro');
-    alert('O Nexa PRO custará R$ 19,90 por mês.\n\nA cobrança ainda NÃO está ativada. Vamos integrar login, pagamento recorrente e verificação segura pelo servidor antes de abrir assinaturas. Nenhum pagamento foi solicitado.');
+    const aviso='ATENÇÃO: este link do PagBank pode cobrar de verdade.\n\nO Nexa PRO ainda NÃO é liberado automaticamente após o pagamento, e a recorrência não foi confirmada.\n\nNão faça pagamentos de teste nem compartilhe com clientes.\n\nDeseja abrir a página apenas para conferir os detalhes?';
+    if(window.confirm(aviso)) window.open('https://pag.ae/82iVpoP9p','_blank','noopener,noreferrer');
   };
   window.nexaShowPremium=function(feature){
     go('pro');
