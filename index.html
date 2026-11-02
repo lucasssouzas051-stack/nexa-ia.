@@ -264,4 +264,84 @@ el.onclick=()=>listar(tipo);
 el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();listar(tipo)}};
 });
 })();
+(function(){
+const MEMORIA='nexa-memoria-v1';
+const renderAnterior=renderChat;
+try{
+const historico=JSON.parse(localStorage.getItem(MEMORIA));
+if(Array.isArray(historico)&&historico.length){
+const validos=historico.filter(m=>m&&['user','bot'].includes(m.role)&&typeof m.text==='string').slice(-40);
+if(validos.length)chatMessages=validos;
+}
+}catch(e){}
+renderChat=function(){
+renderAnterior();
+try{
+localStorage.setItem(MEMORIA,JSON.stringify(chatMessages.slice(-40)));
+}catch(e){}
+};
+renderChat();
+const responderAnterior=responder;
+function registrarMensagem(pergunta,resposta){
+chatMessages.push({role:'user',text:pergunta});
+chatMessages.push({role:'bot',text:resposta});
+$('pergunta').value='';
+renderChat();
+}
+responder=async function(){
+const campo=$('pergunta');
+const pergunta=campo.value.trim();
+if(!pergunta||busy)return;
+if(pergunta.length>2000)return toast('Mensagem muito longa.');
+const agenda=/\b(agende|marque|tenho|anote|lembre-me)\b/i.test(pergunta)&&/(amanh[ãa]|hoje|\d{1,2}\/\d{1,2}|\d{1,2}\s*h)/i.test(pergunta);
+if(agenda){
+const horario=pergunta.match(/(?:[àa]s?\s*)?(\d{1,2})(?:h|:)(\d{2})?/i);
+const dataTexto=pergunta.match(/amanh[ãa]|hoje|\d{1,2}\/\d{1,2}(?:\/\d{4})?/i);
+const detalhe=(dataTexto?dataTexto[0]:'Data não informada')+(horario?' às '+horario[1]+':'+(horario[2]||'00'):'');
+if(!confirm('Cadastrar compromisso?\n'+pergunta+'\n'+detalhe))return;
+data.tasks.push('📅 '+pergunta);
+save();
+registrarMensagem(pergunta,'✅ Compromisso salvo na Agenda!\n'+detalhe+'\nAvisos automáticos ainda não estão disponíveis.');
+return;
+}
+const pedidoMeta=/quero juntar|quero guardar|crie uma meta|criar uma meta|meta de/i.test(pergunta);
+const valor=pergunta.match(/R\$\s*([\d.]+(?:,\d{1,2})?)/i);
+if(pedidoMeta&&valor){
+const numero=Number(valor[1].replace(/\./g,'').replace(',','.'));
+if(!Number.isFinite(numero)||numero<=0)return toast('Informe um valor válido.');
+const nome=pergunta.replace(/R\$\s*[\d.,]+/i,'').replace(/quero juntar|quero guardar|crie uma meta|criar uma meta|meta de/gi,'').trim()||'Nova meta';
+if(!confirm('Criar meta?\n'+nome+'\n'+money(numero)))return;
+data.goals.push({name:nome,value:numero});
+save();
+registrarMensagem(pergunta,'🎯 Meta criada!\n'+nome+'\nObjetivo: '+money(numero)+'\nAcompanhe na aba Metas.');
+return;
+}
+if(/\b(gastei|paguei|comprei|desembolsei|recebi|ganhei|vendi)\b|saldo|quanto.*(gastei|recebi|transporte|gasolina|mercado|moradia)|maiores despesas|qual categoria/i.test(pergunta)){
+return responderAnterior();
+}
+const contexto=chatMessages.filter(m=>['user','bot'].includes(m.role)&&!m.error).slice(-10).map(m=>(m.role==='user'?'Usuário: ':'Nexa: ')+m.text.slice(0,400)).join('\n');
+const mensagem=contexto?'Contexto da conversa anterior:\n'+contexto+'\n\nPergunta atual do usuário: '+pergunta:pergunta;
+campo.value='';
+chatMessages.push({role:'user',text:pergunta});
+chatMessages.push({role:'bot',text:'Digitando...'});
+busy=true;
+$('sendButton').disabled=true;
+$('aiStatus').textContent='● Nexa está pensando...';
+renderChat();
+try{
+const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:mensagem.slice(-2000)})});
+const resposta=await r.json();
+if(!r.ok)throw Error(resposta.error||'Falha de comunicação');
+chatMessages[chatMessages.length-1]={role:'bot',text:String(resposta.reply||'Não recebi uma resposta.')};
+}catch(e){
+chatMessages[chatMessages.length-1]={role:'bot',error:true,text:'Não consegui responder agora. Tente novamente.'};
+console.error(e);
+}finally{
+busy=false;
+$('sendButton').disabled=false;
+$('aiStatus').textContent='● Pronta para conversar';
+renderChat();
+}
+};
+})();
 </script></body></html>
