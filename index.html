@@ -196,6 +196,45 @@ html, body {
 .nexa-admin-customer small{display:block;color:#aab9d4;line-height:1.55}
 .nexa-admin-customer button{margin-top:8px;background:#40366d;border:1px solid #9b86ee88;border-radius:10px;color:#f4eaff;padding:8px 11px;font-weight:700}
 .nexa-admin-result{font-size:12px;color:#d9e5ff;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:12px}
+
+/* Nexa IA 3.0 — acabamento premium e tema Ouro exclusivo para assinantes verificados */
+:root{--radius:26px}
+body{background:radial-gradient(ellipse 80% 32% at 50% -12%,#34265f 0%,transparent 76%),radial-gradient(circle at 100% 42%,#111c38 0%,transparent 48%),var(--bg)}
+.top{padding:7px 0 13px;border-bottom:1px solid #ffffff0b}
+.logo{border-radius:18px;box-shadow:0 12px 35px #7362ff38,inset 0 1px 1px #ffffff5e}
+.brand h1{font-weight:850;letter-spacing:-1.3px}
+.card,.quick button,.nexa-plan,.nexa-pro-head{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:inset 0 1px 0 #ffffff12,0 15px 38px #00000020}
+.card{border-color:#a6a6f323;background:linear-gradient(155deg,#1b2340ed,#111829f5)}
+.quick button{border-color:#a6a6f32a;background:linear-gradient(140deg,#222947,#141d32);transition:border-color .2s,box-shadow .2s}
+@media(hover:hover){.quick button:hover{border-color:#a993ff8c;box-shadow:0 12px 30px #594ac02b}}
+.balance{background:radial-gradient(circle at 90% 5%,#7771d455,transparent 50%),linear-gradient(125deg,#4b368e,#252c6d 55%,#15516c);border-color:#b3a2ff70}
+.tabs{border-color:#9391d73d;background:#171b30ee;box-shadow:0 16px 55px #000a,inset 0 1px #ffffff1b}
+.tabs button.active{background:linear-gradient(135deg,#3e345e,#292d52);color:#f3edff}
+.primary,.nexa-pro-action,.composer button{background:linear-gradient(115deg,#a28aff,#686ef4);box-shadow:0 10px 27px #7260ef39}
+.nexa-theme-toggle{display:none;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:8px 11px;border:1px solid #e7c77a66;border-radius:13px;background:linear-gradient(125deg,#43371e,#292536);color:#ffe5a2;font-size:11px;font-weight:800;white-space:nowrap}
+.nexa-theme-toggle.available{display:inline-flex}
+.nexa-theme-toggle[aria-pressed=true]{background:linear-gradient(120deg,#f7d88c,#b9842f);color:#21170b;border-color:#ffe4a1}
+.nexa-theme-help{font-size:11px;line-height:1.5;color:#aeb9d3;margin:8px 0 0}
+/* Tema Ouro somente quando a assinatura PRO foi validada pelo servidor */
+body.nexa-gold{color-scheme:dark;--bg:#0e0c0a;--surface:#211b14;--surface2:#292116;--border:#b98b3b40;--text:#fff7e9;--muted:#c2af91;--violet:#e7b85b;--cyan:#f3d38b;--green:#a9e4b3;--red:#ffb4a4;background:radial-gradient(ellipse 75% 35% at 50% -10%,#5c421c 0%,transparent 78%),radial-gradient(circle at 100% 42%,#33240f 0%,transparent 50%),#0e0c0a}
+.nexa-gold .logo,.nexa-gold .nexa-auth-brand-mark{background:linear-gradient(135deg,#ffdf94,#c48a35 55%,#79501b);box-shadow:0 10px 34px #d39c4038;color:#2c1d0b}
+.nexa-gold .brand h1 span,.nexa-gold .eyebrow,.nexa-gold .card-title .ico,.nexa-gold .section-kicker{color:#f1c875}
+.nexa-gold .card,.nexa-gold .quick button,.nexa-gold .nexa-plan,.nexa-gold .nexa-pro-feature,.nexa-gold .nexa-premium-feature{background:linear-gradient(150deg,#2b2319,#17130f);border-color:#d3a45442}
+.nexa-gold .balance,.nexa-gold .bank-hero{background:radial-gradient(circle at 90% 5%,#ffe4a14a,transparent 52%),linear-gradient(120deg,#76501d,#382816 60%,#231d15);border-color:#e9bb6b8c;box-shadow:0 18px 48px #a67a2625}
+.nexa-gold .primary,.nexa-gold .nexa-pro-action,.nexa-gold .composer button,.nexa-gold .nexa-auth-primary{background:linear-gradient(120deg,#ffe29c,#d3a04a 55%,#b77d2c);color:#21170b;border-color:#ffdf94;box-shadow:0 10px 27px #b98a3d33}
+.nexa-gold .tabs{background:#211a13f2;border-color:#b78b474f}
+.nexa-gold .tabs button.active{background:#513c21;color:#ffdc91}
+.nexa-gold .tabs button[data-page=assistente] .tabicon{background:linear-gradient(140deg,#f5d68d,#a67529);color:#261909}
+.nexa-gold .input,.nexa-gold .composer,.nexa-gold .nexa-auth-form input{background:#1c1711;border-color:#a47b3b70;color:#fff5e5}
+.nexa-gold .ghost,.nexa-gold .circle,.nexa-gold .nexa-auth-secondary{background:#35291a;color:#ffe0a0;border-color:#a77e3d60}
+.nexa-gold .bubble.bot{background:#2a2117;border-color:#8d6d3b70;color:#fff2dc}
+.nexa-gold .bubble.user{background:linear-gradient(135deg,#d3a44e,#8b6129);color:#1e150b}
+.nexa-gold .nexa-pro-head,.nexa-gold .nexa-premium-hero{background:radial-gradient(circle at 95% 0%,#c99c4759,transparent 52%),linear-gradient(145deg,#50391b,#211910 80%);border-color:#e1b66b78}
+.nexa-gold .nexa-auth-gate{background:radial-gradient(ellipse at 50% 0%,#4a3317,#0e0c0a 70%)}
+.nexa-gold .nexa-auth-box{background:linear-gradient(160deg,#2d2419,#17130f);border-color:#c99d5655}
+.nexa-gold .welcome{background:linear-gradient(145deg,#35281a,#1c1712)}
+@media(max-width:430px){.nexa-theme-toggle{font-size:10px;padding:7px 8px;min-height:36px}.top-actions{gap:5px}}
+@media(prefers-reduced-motion:reduce){.quick button{transition:none}}
 </style><script>
 /* Desativa gestos de ampliar no Safari iOS; nao bloqueia rolagem normal. */
 (function manterEscalaNexa(){
@@ -318,7 +357,7 @@ window.NEXA_USER_STORAGE_SUFFIX = (function(){
 </div><div class="app">
 <header class="top">
  <div class="brand"><div class="logo"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m19 17 .7 1.3L21 19l-1.3.7L19 21l-.7-1.3L17 19l1.3-.7L19 17ZM5 2l.7 1.3L7 4l-1.3.7L5 6l-.7-1.3L3 4l1.3-.7L5 2Z"/></svg></div><div><h1>Nexa <span>IA</span></h1><small>Seu universo, em ordem</small></div></div>
- <div class="top-actions"><button type="button" class="nexa-auth-profile-btn" onclick="nexaAuthOpenAccount()" title="Minha conta" aria-label="Minha conta"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.3"/><path d="M5.5 20v-2.1a6.5 6.5 0 0 1 13 0V20"/></svg></button><button type="button" class="nexa-pro-top" onclick="go('pro')" aria-label="Conhecer Nexa PRO"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l5 4 5-8 5 8 5-4-2 12H4L2 8Z"/><path d="M4 16h16"/></svg> PRO</button><button class="circle" aria-label="Sobre a Nexa IA" onclick="toast('Nexa IA • Assistente pessoal e financeiro')"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg></button><button class="circle" aria-label="Privacidade dos dados" onclick="toast('Seus dados financeiros ainda são guardados neste navegador. O login não ativa a sincronização.')"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></button></div>
+ <div class="top-actions"><button type="button" class="nexa-theme-toggle" id="nexaThemeToggle" aria-pressed="false" title="Tema Ouro exclusivo Nexa PRO">✦ Ouro</button><button type="button" class="nexa-auth-profile-btn" onclick="nexaAuthOpenAccount()" title="Minha conta" aria-label="Minha conta"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.3"/><path d="M5.5 20v-2.1a6.5 6.5 0 0 1 13 0V20"/></svg></button><button type="button" class="nexa-pro-top" onclick="go('pro')" aria-label="Conhecer Nexa PRO"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l5 4 5-8 5 8 5-4-2 12H4L2 8Z"/><path d="M4 16h16"/></svg> PRO</button><button class="circle" aria-label="Sobre a Nexa IA" onclick="toast('Nexa IA • Assistente pessoal e financeiro')"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg></button><button class="circle" aria-label="Privacidade dos dados" onclick="toast('Seus dados financeiros ainda são guardados neste navegador. O login não ativa a sincronização.')"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></button></div>
 </header>
 <section id="inicio" class="active">
  <p class="eyebrow">SEU ESPAÇO INTELIGENTE</p><h2 class="hello">Seu dia, mais leve. <span aria-hidden="true">✳</span></h2><p class="subtitle">Tudo o que você precisa para cuidar da vida e do dinheiro.</p>
@@ -1494,4 +1533,32 @@ $('bankTxDate').value=today();bankRender();
  });
  if(validConfig(config)){initialize();}else if(readLocalProfile()){unlockDemo();}else{document.body.classList.add('nexa-auth-loading');openLocalProfile();}
 })();
-</script></body></html>
+</script>
+<script>
+/* Tema visual: a preferência local não concede acesso PRO. */
+(function(){
+ const KEY='nexa-gold-theme-v1';
+ const buttons=[document.getElementById('nexaThemeToggle'),document.getElementById('nexaThemeAccount')].filter(Boolean);
+ const help=document.getElementById('nexaThemeHelp');
+ function sync(){
+   const entitled=window.nexaVerifiedProActive===true;
+   let wanted=false;
+   try{wanted=localStorage.getItem(KEY)==='gold'}catch(e){}
+   const enabled=entitled&&wanted;
+   document.body.classList.toggle('nexa-gold',enabled);
+   buttons.forEach(b=>{b.classList.toggle('available',entitled);b.setAttribute('aria-pressed',String(enabled));b.textContent=enabled?'✦ Tema Ouro ativo':'✦ Ativar Ouro';});
+   if(help)help.hidden=!entitled;
+ }
+ buttons.forEach(b=>b.addEventListener('click',()=>{
+   if(window.nexaVerifiedProActive!==true){sync();return;}
+   const next=document.body.classList.contains('nexa-gold')?'default':'gold';
+   try{localStorage.setItem(KEY,next)}catch(e){}
+   sync();
+ }));
+ const original=window.nexaRefreshPlanUI;
+ window.nexaRefreshPlanUI=function(){if(typeof original==='function')original.apply(this,arguments);sync()};
+ sync();
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)sync()});
+})();
+</script>
+</body></html>
